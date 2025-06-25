@@ -8,7 +8,7 @@ import { TypedArray } from "three";
 const Stars = (props: any) => {
   const ref = useRef<THREE.Points>();
   const [sphere] = useState<TypedArray>(() =>
-    random.inSphere(new Float32Array(5001), { radius: 1.2 })
+    random.inSphere(new Float32Array(500), { radius: 1.2 })
   );
 
   useFrame((_state, delta) => {

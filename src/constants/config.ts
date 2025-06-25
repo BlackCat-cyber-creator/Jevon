@@ -14,22 +14,7 @@ type TConfig = {
     name: string;
     p: string[];
   };
-  contact: {
-    form: {
-      name: {
-        span: string;
-        placeholder: string;
-      };
-      email: {
-        span: string;
-        placeholder: string;
-      };
-      message: {
-        span: string;
-        placeholder: string;
-      };
-    };
-  } & TSection;
+  contact: TSection;
   sections: {
     about: Required<TSection>;
     experience: TSection;
@@ -51,17 +36,6 @@ export const config: TConfig = {
   contact: {
     p: "Get in touch",
     h2: "Contact.",
-    form: {
-      name: {
-        span: "Your Name",
-        placeholder: "What's your name?",
-      },
-      email: { span: "Your Email", placeholder: "What's your email?" },
-      message: {
-        span: "Your Message",
-        placeholder: "What do you want to say?",
-      },
-    },
   },
   sections: {
     about: {
