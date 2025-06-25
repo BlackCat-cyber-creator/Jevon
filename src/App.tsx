@@ -3,14 +3,14 @@ import React, { Suspense, lazy } from "react";
 
 import {
   About,
-  Contact,
+  // Contact,
   Experience,
   Feedbacks,
   Hero,
   Navbar,
   Tech,
   Works,
-  StarsCanvas,
+  // StarsCanvas,
 } from "./components";
 import { useEffect } from "react";
 import { config } from "./constants/config";
