@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
 
 import {
   About,
@@ -13,6 +14,9 @@ import {
 } from "./components";
 import { useEffect } from "react";
 import { config } from "./constants/config";
+
+const Contact = lazy(() => import("./components/sections/Contact"));
+const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
 
 const App = () => {
   useEffect(() => {
@@ -34,8 +38,12 @@ const App = () => {
         <Works />
         <Feedbacks />
         <div className="relative z-0">
-          <Contact />
-          <StarsCanvas />
+          <Suspense fallback={<div>Loading Contact...</div>}>
+            <Contact />
+          </Suspense>
+          <Suspense fallback={<div>Loading Stars...</div>}>
+            <StarsCanvas />
+          </Suspense>
         </div>
       </div>
     </BrowserRouter>
