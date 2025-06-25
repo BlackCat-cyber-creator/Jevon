@@ -1,5 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import Lenis from 'lenis';
 
 import {
   About,
@@ -12,54 +13,39 @@ import {
   Works,
   // StarsCanvas,
 } from "./components";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react"; // Removed useRef as touchStartY is no longer needed
 import { config } from "./constants/config";
 
 const Contact = lazy(() => import("./components/sections/Contact"));
 const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
 
 const App = () => {
-  const touchStartY = useRef(0);
+  // Removed touchStartY as it's no longer needed with Lenis
+  // const touchStartY = useRef(0);
 
   useEffect(() => {
     if (document.title !== config.html.title) {
       document.title = config.html.title;
     }
 
-    // Function to handle slow scrolling for wheel events (desktop)
-    const handleWheel = (event: WheelEvent) => {
-      event.preventDefault(); // Prevent default scroll behavior
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      lerp: 0.075, // Adjust this value for overall scroll smoothness/speed (lower = smoother/slower)
+      wheelMultiplier: 0.6, // Adjust this for mouse wheel sensitivity (lower = slower response)
+      touchMultiplier: 0.6, // Adjust this for touch scroll sensitivity (lower = slower response)
+      autoRaf: true, // Automatically run requestAnimationFrame loop
+    });
 
-      const scrollAmount = event.deltaY * 0.17; // Adjust this value to control scroll speed
-      window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-    };
+    // Optional: Log scroll events (can be removed once satisfied)
+    // lenis.on('scroll', (e) => {
+    //   console.log(e);
+    // });
 
-    // Functions to handle slow scrolling for touch events (mobile)
-    const handleTouchStart = (event: TouchEvent) => {
-      touchStartY.current = event.touches[0].clientY;
-    };
-
-    const handleTouchMove = (event: TouchEvent) => {
-      const currentY = event.touches[0].clientY;
-      const deltaY = touchStartY.current - currentY;
-      const scrollAmount = deltaY * 0.5; // Adjust this value to control touch scroll speed
-
-      window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-      touchStartY.current = currentY; // Update startY for continuous scrolling
-    };
-
-    // Add event listeners
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-
-    // Cleanup: remove the event listeners when the component unmounts
+    // Cleanup: destroy lenis instance when component unmounts
     return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
+      lenis.destroy();
     };
-  }, []);
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
     <BrowserRouter>
