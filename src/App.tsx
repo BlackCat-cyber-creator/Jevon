@@ -12,19 +12,21 @@ import {
   Works,
   // StarsCanvas,
 } from "./components";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { config } from "./constants/config";
 
 const Contact = lazy(() => import("./components/sections/Contact"));
 const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
 
 const App = () => {
+  const touchStartY = useRef(0);
+
   useEffect(() => {
     if (document.title !== config.html.title) {
       document.title = config.html.title;
     }
 
-    // Function to handle slow scrolling
+    // Function to handle slow scrolling for wheel events (desktop)
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault(); // Prevent default scroll behavior
 
@@ -32,12 +34,32 @@ const App = () => {
       window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
     };
 
-    // Add the event listener
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    // Functions to handle slow scrolling for touch events (mobile)
+    const handleTouchStart = (event: TouchEvent) => {
+      touchStartY.current = event.touches[0].clientY;
+    };
 
-    // Cleanup: remove the event listener when the component unmounts
+    const handleTouchMove = (event: TouchEvent) => {
+      event.preventDefault(); // Prevent default touch scroll behavior
+
+      const currentY = event.touches[0].clientY;
+      const deltaY = touchStartY.current - currentY;
+      const scrollAmount = deltaY * 0.1; // Adjust this value to control touch scroll speed
+
+      window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+      touchStartY.current = currentY; // Update startY for continuous scrolling
+    };
+
+    // Add event listeners
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    // Cleanup: remove the event listeners when the component unmounts
     return () => {
       window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
 

@@ -21,8 +21,8 @@ const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
       <pointLight intensity={10} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.5 : 0.65}
-        position={isMobile ? [0, -1.75, -2.2] : [0, -2.5, -4.5]}
+        scale={isMobile ? 0.3 : 0.65}
+        position={isMobile ? [-1, -1.75, -2.2] : [0, -2.5, -4.5]}
         rotation={[-0.01, -1, -0.1]}
       />
     </mesh>
