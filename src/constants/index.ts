@@ -128,10 +128,10 @@ const experiences: TExperience[] = [
     iconBg: "#383E56",
     date: "Feb 2025 - Mar 2025",
     points: [
-      "Developed and maintained web applications using React.js.",
-      "Collaborated with cross-functional teams to create high-quality products.",
-      "Implemented responsive design and ensured cross-browser compatibility.",
-      "Participated in code reviews and provided feedback.",
+      "Developing and maintaining web applications using React.js.",
+      "Collaborating with cross-functional teams to create high-quality products.",
+      "Implementing responsive design and ensuring cross-browser compatibility.",
+      "Participating in code reviews and providing feedback.",
     ],
   },
   {
@@ -141,10 +141,10 @@ const experiences: TExperience[] = [
     iconBg: "#E6DEDD",
     date: "Mar 2025 - Apr 2025",
     points: [
-      "Developed and maintained React Native applications.",
-      "Collaborated with teams on product development.",
-      "Ensured responsive design and cross-platform compatibility.",
-      "Contributed to code reviews.",
+      "Developing and maintaining React Native applications.",
+      "Collaborating with teams on product development.",
+      "Ensuring responsive design and cross-platform compatibility.",
+      "Contributing to code reviews.",
     ],
   },
   {
@@ -154,10 +154,10 @@ const experiences: TExperience[] = [
     iconBg: "#383E56",
     date: "Apr 2025 - May 2025",
     points: [
-      "Developed and maintained web applications.",
-      "Collaborated with teams on product development.",
-      "Implemented responsive design and cross-browser compatibility.",
-      "Participated in code reviews.",
+      "Developing and maintaining web applications.",
+      "Collaborating with teams on product development.",
+      "Implementing responsive design and cross-browser compatibility.",
+      "Participating in code reviews.",
     ],
   },
   {
@@ -167,10 +167,10 @@ const experiences: TExperience[] = [
     iconBg: "#E6DEDD",
     date: "May 2025 - Present",
     points: [
-      "Developed and maintained full-stack web applications.",
-      "Collaborated with cross-functional teams.",
-      "Ensured responsive design and cross-browser compatibility.",
-      "Contributed to code reviews and provided feedback.",
+      "Developing and maintaining full-stack web applications.",
+      "Collaborating with cross-functional teams.",
+      "Ensuring responsive design and cross-browser compatibility.",
+      "Contributing to code reviews and providing feedback.",
     ],
   },
 ];
