@@ -24,6 +24,9 @@ const App = () => {
   // const touchStartY = useRef(0);
 
   useEffect(() => {
+    // Scroll to the top of the page on component mount/refresh
+    window.scrollTo(0, 0);
+
     if (document.title !== config.html.title) {
       document.title = config.html.title;
     }
