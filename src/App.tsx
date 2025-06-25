@@ -30,7 +30,7 @@ const App = () => {
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault(); // Prevent default scroll behavior
 
-      const scrollAmount = event.deltaY * 0.1; // Adjust this value to control scroll speed
+      const scrollAmount = event.deltaY * 0.17; // Adjust this value to control scroll speed
       window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
     };
 
@@ -44,7 +44,7 @@ const App = () => {
 
       const currentY = event.touches[0].clientY;
       const deltaY = touchStartY.current - currentY;
-      const scrollAmount = deltaY * 0.1; // Adjust this value to control touch scroll speed
+      const scrollAmount = deltaY * 0.5; // Adjust this value to control touch scroll speed
 
       window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
       touchStartY.current = currentY; // Update startY for continuous scrolling

@@ -29,7 +29,7 @@ const Contact = () => {
           grainUrl="src/assets/logo.png"
           showUserInfo={true}
           enableTilt={true}
-          className="mb-10"
+          className="mb-20"
         />
       </motion.div>
     </div>
