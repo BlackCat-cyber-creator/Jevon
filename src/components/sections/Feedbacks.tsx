@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
 
 import { styles } from "../../constants/styles";
 import { fadeIn } from "../../utils/motion";
@@ -7,17 +8,20 @@ import { Header } from "../atoms/Header";
 import { TTestimonial } from "../../types";
 import { config } from "../../constants/config";
 
-const FeedbackCard: React.FC<{ index: number } & TTestimonial> = ({
+const FeedbackCard: React.FC<{ index: number; isMobile: boolean } & TTestimonial> = ({
   index,
   testimonial,
   name,
   designation,
   company,
   image,
+  isMobile,
 }) => (
   <motion.div
-    variants={fadeIn("", "spring", index * 0.5, 0.75)}
+    variants={!isMobile ? fadeIn("", "spring", index * 0.5, 0.75) : {}}
     className="bg-black-200 xs:w-[320px] w-full rounded-3xl p-10"
+    initial={isMobile ? false : "hidden"}
+    animate={isMobile ? "visible" : "show"}
   >
     <p className="text-[48px] font-black text-white">"</p>
 
@@ -45,18 +49,36 @@ const FeedbackCard: React.FC<{ index: number } & TTestimonial> = ({
 );
 
 const Feedbacks = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
+
   return (
     <div className="bg-black-100 mt-12 rounded-[20px]">
       <div
         className={`${styles.padding} bg-tertiary min-h-[300px] rounded-2xl`}
       >
-        <Header useMotion={true} {...config.sections.feedbacks} />
+        <Header useMotion={!isMobile} {...config.sections.feedbacks} />
       </div>
       <div
         className={`${styles.paddingX} -mt-20 flex flex-wrap gap-7 pb-14 max-sm:justify-center`}
       >
         {testimonials.map((testimonial, index) => (
-          <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
+          <FeedbackCard key={testimonial.name} index={index} {...testimonial} isMobile={isMobile} />
         ))}
       </div>
     </div>
