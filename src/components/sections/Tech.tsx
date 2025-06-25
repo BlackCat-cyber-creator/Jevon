@@ -1,7 +1,7 @@
 import { BallCanvas } from "../canvas";
 import { SectionWrapper } from "../../hoc";
 import { technologies } from "../../constants";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Tech = () => {
   const [isMobile, setIsMobile] = useState(false);
