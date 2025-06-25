@@ -124,8 +124,8 @@ const Contact = () => {
           handle="jevon.n.shield"
           status="Online"
           contactText="Contact"
-          avatarUrl="/public/jevon.png"
-          miniAvatarUrl="/public/jevon.png"
+          avatarUrl="/jevon.png"
+          miniAvatarUrl="/jevon.png"
           iconUrl="/insta.png"
           grainUrl="/insta.png"
           showUserInfo={true}
