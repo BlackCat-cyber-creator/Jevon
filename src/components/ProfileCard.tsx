@@ -17,7 +17,6 @@ interface ProfileCardProps {
   status?: string;
   contactText?: string;
   showUserInfo?: boolean;
-  onContactClick?: () => void;
 }
 
 // Define an interface for custom CSS properties
@@ -84,7 +83,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   status = "Online",
   contactText,
   showUserInfo = true,
-  onContactClick,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLElement>(null);

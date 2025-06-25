@@ -21,8 +21,8 @@ const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
       <pointLight intensity={10} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.6 : 0.65}
-        position={isMobile ? [0, -1.25, -5.2] : [0, -2.5, -4.5]}
+        scale={isMobile ? 0.5 : 0.65}
+        position={isMobile ? [0, -1.75, -2.2] : [0, -2.5, -4.5]}
         rotation={[-0.01, -1, -0.1]}
       />
     </mesh>
@@ -54,30 +54,24 @@ const ComputersCanvas = () => {
   }, []);
 
   return (
-    <>
-      {isMobile ? (
-        <></>
-      ) : (
-        <Canvas
-          frameloop="demand"
-          shadows
-          dpr={[1, 2]}
-          camera={{ position: [20, 3, 5], fov: 25 }}
-          gl={{ preserveDrawingBuffer: true }}
-        >
-          <Suspense fallback={<CanvasLoader />}>
-            <OrbitControls
-              enablePan={false}
-              enableZoom={false}
-              maxPolarAngle={Math.PI / 2}
-              minPolarAngle={Math.PI / 2}
-            />
-            <Computers isMobile={isMobile} />
-          </Suspense>
-          <Preload all />
-        </Canvas>
-      )}
-    </>
+    <Canvas
+      frameloop="demand"
+      shadows
+      dpr={[1, 2]}
+      camera={{ position: [20, 3, 5], fov: 25 }}
+      gl={{ preserveDrawingBuffer: true }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
+        <Computers isMobile={isMobile} />
+      </Suspense>
+      <Preload all />
+    </Canvas>
   );
 };
 
