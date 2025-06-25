@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 
 import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
