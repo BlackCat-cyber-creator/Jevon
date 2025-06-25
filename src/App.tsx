@@ -23,6 +23,22 @@ const App = () => {
     if (document.title !== config.html.title) {
       document.title = config.html.title;
     }
+
+    // Function to handle slow scrolling
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault(); // Prevent default scroll behavior
+
+      const scrollAmount = event.deltaY * 0.1; // Adjust this value to control scroll speed
+      window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+    };
+
+    // Add the event listener
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
+    // Cleanup: remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+    };
   }, []);
 
   return (

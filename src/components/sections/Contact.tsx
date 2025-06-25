@@ -26,7 +26,7 @@ const Contact = () => {
           avatarUrl="/jevon.png"
           miniAvatarUrl="/jevon.png"
           iconUrl="/insta.png"
-          grainUrl="/insta.png"
+          grainUrl="src/assets/logo.png"
           showUserInfo={true}
           enableTilt={true}
           className="mb-10"
