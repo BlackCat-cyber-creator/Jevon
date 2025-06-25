@@ -29,7 +29,6 @@ const Contact = () => {
           grainUrl="/insta.png"
           showUserInfo={true}
           enableTilt={true}
-          onContactClick={() => console.log('Contact clicked')}
           className="mb-10"
         />
       </motion.div>
