@@ -89,6 +89,10 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLElement>(null);
 
+  const handleContactClick = () => {
+    window.open("https://www.instagram.com/jevon.n.shield/", "_blank");
+  };
+
   const animationHandlers = useMemo(() => {
     if (!enableTilt) return null;
 
@@ -270,10 +274,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
   );
 
-  const handleContactClick = useCallback(() => {
-    onContactClick?.();
-  }, [onContactClick]);
-
   return (
     <div
       ref={wrapRef}
@@ -316,11 +316,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                   </div>
                 </div>
                 <button
-                  className="pc-contact-btn"
-                  onClick={handleContactClick}
-                  style={{ pointerEvents: "auto" }}
-                  type="button"
-                  aria-label={`Contact ${name || "user"}`}
+                  onClick={onContactClick || handleContactClick}
+                  className="contact-button"
                 >
                   {contactText}
                 </button>
