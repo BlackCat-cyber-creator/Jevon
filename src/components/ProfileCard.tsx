@@ -316,8 +316,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                   </div>
                 </div>
                 <button
-                  onClick={onContactClick || handleContactClick}
-                  className="contact-button"
+                                    className="pc-contact-btn"
+                                    onClick={handleContactClick}
+                                    style={{ pointerEvents: "auto" }}
+                                    type="button"
+                                    aria-label={`Contact ${name || "user"}`}
+                  
                 >
                   {contactText}
                 </button>
