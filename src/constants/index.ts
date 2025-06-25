@@ -128,10 +128,10 @@ const experiences: TExperience[] = [
     iconBg: "#383E56",
     date: "Feb 2025 - Mar 2025",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Developed and maintained web applications using React.js.",
+      "Collaborated with cross-functional teams to create high-quality products.",
+      "Implemented responsive design and ensured cross-browser compatibility.",
+      "Participated in code reviews and provided feedback.",
     ],
   },
   {
@@ -141,10 +141,10 @@ const experiences: TExperience[] = [
     iconBg: "#E6DEDD",
     date: "Mar 2025 - Apr 2025",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Developed and maintained React Native applications.",
+      "Collaborated with teams on product development.",
+      "Ensured responsive design and cross-platform compatibility.",
+      "Contributed to code reviews.",
     ],
   },
   {
@@ -154,10 +154,10 @@ const experiences: TExperience[] = [
     iconBg: "#383E56",
     date: "Apr 2025 - May 2025",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Developed and maintained web applications.",
+      "Collaborated with teams on product development.",
+      "Implemented responsive design and cross-browser compatibility.",
+      "Participated in code reviews.",
     ],
   },
   {
@@ -167,10 +167,10 @@ const experiences: TExperience[] = [
     iconBg: "#E6DEDD",
     date: "May 2025 - Present",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Developed and maintained full-stack web applications.",
+      "Collaborated with cross-functional teams.",
+      "Ensured responsive design and cross-browser compatibility.",
+      "Contributed to code reviews and provided feedback.",
     ],
   },
 ];
