@@ -18,12 +18,12 @@ const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         castShadow
         shadow-mapSize={1024}
       />
-      <pointLight intensity={1} />
+      <pointLight intensity={10} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -4.25, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
+        scale={isMobile ? 0.6 : 0.65}
+        position={isMobile ? [0, -1.25, -5.2] : [0, -2.5, -4.5]}
+        rotation={[-0.01, -1, -0.1]}
       />
     </mesh>
   );

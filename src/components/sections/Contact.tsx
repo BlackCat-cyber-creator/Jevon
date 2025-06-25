@@ -13,14 +13,6 @@ const Contact = () => {
       className={`flex flex-col-reverse gap-10 overflow-hidden xl:mt-12 xl:flex-row`}
     >
       <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className="bg-black-100 flex-[0.75] rounded-2xl p-8"
-      >
-        <Header useMotion={false} {...config.contact} />
-        <p className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]">Email functionality has been removed for simplicity.</p>
-      </motion.div>
-
-      <motion.div
         variants={slideIn("right", "tween", 0.2, 1)}
         className="xl:flex-1 flex flex-col items-center justify-center gap-10"
       >
