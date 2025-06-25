@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import { EarthCanvas } from "../canvas";
 import { SectionWrapper } from "../../hoc";
 import { slideIn } from "../../utils/motion";
-import { config } from "../../constants/config";
-import { Header } from "../atoms/Header";
 import ProfileCard from "../ProfileCard";
 
 const Contact = () => {
