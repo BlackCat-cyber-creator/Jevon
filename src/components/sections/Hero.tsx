@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Suspense, lazy } from "react";
 
 import { styles } from "../../constants/styles";
