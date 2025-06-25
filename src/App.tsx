@@ -40,8 +40,6 @@ const App = () => {
     };
 
     const handleTouchMove = (event: TouchEvent) => {
-      event.preventDefault(); // Prevent default touch scroll behavior
-
       const currentY = event.touches[0].clientY;
       const deltaY = touchStartY.current - currentY;
       const scrollAmount = deltaY * 0.5; // Adjust this value to control touch scroll speed
