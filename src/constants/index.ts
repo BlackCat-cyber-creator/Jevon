@@ -34,15 +34,15 @@ import {
 export const navLinks: TNavLink[] = [
   {
     id: "about",
-    title: "About",
+    title: "A Seadog's Tale",
   },
   {
     id: "work",
-    title: "Work",
+    title: "My Plunders",
   },
   {
     id: "contact",
-    title: "Contact",
+    title: "Hail Me!",
   },
 ];
 

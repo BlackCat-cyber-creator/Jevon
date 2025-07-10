@@ -25,41 +25,42 @@ type TConfig = {
 
 export const config: TConfig = {
   html: {
-    title: "Cap'n J — Portfolio",
-    fullName: "Jevon Naldo Yoshield",
-    email: "jevonyoshield@mail.com",
+    title: "Cap'n J's Treasure Map",
+    fullName: "Cap'n Jevon, Master of the Code Seas",
+    email: "jevonyoshield@mail.com", // Keeping practical email as is
   },
   hero: {
-    name: "Jevon",
-    p: ["I develop 3D visuals, user", "interfaces and web applications"],
+    name: "Cap'n J",
+    p: ["I forge grand visual tales,", "charts for yer crew, and webs o' wonder for the digital seas."],
   },
   contact: {
-    p: "Get in touch",
-    h2: "Contact.",
+    p: "Send yer message, matey",
+    h2: "Hail Me!",
   },
   sections: {
     about: {
-      p: "Introduction",
-      h2: "Overview.",
-      content: `A skilled software developer with expertise in TypeScript, JavaScript,
-        React, Node.js, and Three.js. I quickly learn and collaborate with clients
-        to create efficient, scalable, user-friendly solutions. Let's work together
-        to bring your ideas to life!`,
+      p: "A Seadog's Tale",
+      h2: "My Voyage.",
+      content: `A seasoned software buccaneer with mastery o' TypeScript, JavaScript,
+        React, Node.js, and Three.js. I learn quick as a scurvy dog and collaborate with fellow captains
+        to forge swift, mighty, and easy-to-sail solutions. Let's join forces
+        and bring yer grandest visions to life, arr!`,
     },
     experience: {
-      p: "What I have done so far",
-      h2: "Work Experience.",
+      p: "My Adventures So Far",
+      h2: "My Plunders.",
     },
     feedbacks: {
-      p: "What others say",
-      h2: "Testimonials.",
+      p: "What the Crew Whispers",
+      h2: "Shanties o' Praise.",
     },
     works: {
-      p: "My work",
-      h2: "Projects.",
-      content: `Showcasing my skills through real-world projects with brief descriptions,
-        code links, and live demos. Reflects my ability to solve complex problems,
-        work with diverse technologies, and manage projects effectively.`,
+      p: "My Booty",
+      h2: "Grand Heists.",
+      content: `Behold, me skills showcased through real-world ventures with brief charts,
+        links to the code's treasure, and live demonstrations. This be a testament
+        to my knack for conquerin' knotty problems, wieldin' diverse technologies,
+        and steerin' projects with a firm hand.`,
     },
   },
 };
