@@ -9,9 +9,11 @@ const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const computer = useGLTF("./ship_in_a_bottle.glb");
   const meshRef = useRef<Mesh>(null!);
 
-  useFrame(() => {
+  useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005;
+      // Apply rotation and sway for both mobile and desktop
+      meshRef.current.rotation.y += 0.005; // Existing rotation
+      meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1; // Only apply the oscillating sway
     }
   });
 

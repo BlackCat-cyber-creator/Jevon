@@ -1,14 +1,23 @@
-import { Suspense, memo } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, memo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import * as THREE from 'three';
 
 import CanvasLoader from "../layout/Loader";
 
 const Earth = () => {
   const earth = useGLTF("./pirates_map.glb");
+  const ref = useRef<THREE.Group>(null);
+
+  useFrame((state, delta) => {
+    if (ref.current) {
+      ref.current.rotation.y += delta * 0.5;
+      ref.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1 - 1;
+    }
+  });
 
   return (
-    <primitive object={earth.scene} scale={8} position-y={-1} rotation-y={0} />
+    <primitive object={earth.scene} scale={8} position-y={-1} rotation-y={0} ref={ref} />
   );
 };
 
@@ -40,7 +49,7 @@ const EarthCanvas = () => {
       <pointLight intensity={500} position={[0, 0, -30]} />
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
-          autoRotate
+          // autoRotate
           enablePan={false}
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}

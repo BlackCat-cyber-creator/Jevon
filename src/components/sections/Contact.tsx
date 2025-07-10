@@ -19,7 +19,7 @@ const Contact = () => {
         </div>
         <ProfileCard
           name="Jevon"
-          title="Captain Pirate"
+          title="Serpent Kiss' Captain"
           handle="jevon.n.shield"
           status="Online"
           contactText="Contact"
