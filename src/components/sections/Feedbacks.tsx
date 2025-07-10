@@ -8,14 +8,13 @@ import { Header } from "../atoms/Header";
 import { TTestimonial } from "../../types";
 import { config } from "../../constants/config";
 
-const FeedbackCard: React.FC<{ index: number; isMobile: boolean } & TTestimonial> = ({
+const FeedbackCard: React.FC<{ index: number } & TTestimonial> = ({
   index,
   testimonial,
   name,
   designation,
   company,
   image,
-  isMobile,
 }) => (
   <motion.div
     variants={fadeIn("", "tween", index * 0.5, 0.75)}
@@ -78,7 +77,7 @@ const Feedbacks = () => {
         className={`${styles.paddingX} -mt-20 flex flex-wrap gap-7 pb-14 max-sm:justify-center`}
       >
         {testimonials.map((testimonial, index) => (
-          <FeedbackCard key={testimonial.name} index={index} {...testimonial} isMobile={isMobile} />
+          <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
         ))}
       </div>
     </div>
