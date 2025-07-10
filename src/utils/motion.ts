@@ -11,8 +11,8 @@ export const textVariant = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
-        duration: 1.25,
+        type: "tween", // Changed from "spring" to "tween"
+        duration: 0.75, // Reduced duration
       },
     },
   };
@@ -35,7 +35,7 @@ export const fadeIn = (
       y: 0,
       opacity: 1,
       transition: {
-        type,
+        type, // This will now be "tween"
         delay,
         duration,
         ease: "easeOut",

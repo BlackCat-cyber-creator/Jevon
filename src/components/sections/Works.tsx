@@ -41,7 +41,7 @@ const ProjectCard: React.FC<{ index: number; isMobile: boolean } & TProject> = (
         </div>
       </div>
       <div className="mt-5">
-        <h3 className="text-[24px] font-bold text-white">{name}</h3>
+        <h3 className="text-[24px] font-bold text-white font-pirata">{name}</h3>
         <p className="text-secondary mt-2 text-[14px]">{description}</p>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
@@ -57,10 +57,10 @@ const ProjectCard: React.FC<{ index: number; isMobile: boolean } & TProject> = (
   return isMobile ? (
     <div>{cardContent}</div>
   ) : (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
+    <motion.div variants={fadeIn("up", "tween", index * 0.5, 0.75)}>
       <Tilt
-        glareEnable
-        tiltEnable
+        glareEnable={!isMobile} /* Conditionally disable glare on mobile */
+        tiltEnable={!isMobile} /* Conditionally disable tilt on mobile */
         tiltMaxAngleX={30}
         tiltMaxAngleY={30}
         glareColor="#aaa6c3"

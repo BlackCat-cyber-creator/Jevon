@@ -17,7 +17,7 @@ const Hero = () => {
         </div>
 
         <div>
-          <h1 className={`${styles.heroHeadText} text-white`}>
+          <h1 className={`${styles.heroHeadText} text-white font-pirata`}>
             Hi, I'm <span className="text-[#915EFF]">{config.hero.name}</span>
           </h1>
           <p className={`${styles.heroSubText} text-white-100 mt-2`}>
@@ -27,7 +27,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <Suspense fallback={<div>Loading Computers...</div>}>
+      <Suspense fallback={<div>Loading Ship...</div>}>
         <ComputersCanvas />
       </Suspense>
     </section>

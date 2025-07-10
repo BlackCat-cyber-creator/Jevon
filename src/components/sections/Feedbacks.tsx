@@ -18,10 +18,10 @@ const FeedbackCard: React.FC<{ index: number; isMobile: boolean } & TTestimonial
   isMobile,
 }) => (
   <motion.div
-    variants={!isMobile ? fadeIn("", "spring", index * 0.5, 0.75) : {}}
+    variants={fadeIn("", "tween", index * 0.5, 0.75)}
     className="bg-black-200 xs:w-[320px] w-full rounded-3xl p-10"
-    initial={isMobile ? false : "hidden"}
-    animate={isMobile ? "visible" : "show"}
+    initial="hidden"
+    animate="show"
   >
     <p className="text-[48px] font-black text-white">"</p>
 

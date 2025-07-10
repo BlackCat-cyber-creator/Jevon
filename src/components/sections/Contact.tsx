@@ -14,7 +14,7 @@ const Contact = () => {
         variants={slideIn("right", "tween", 0.2, 1)}
         className="xl:flex-1 flex flex-col items-center justify-center gap-10"
       >
-        <div className="h-[350px] md:h-[550px] xl:h-auto w-full flex items-center justify-center">
+        <div className="h-[300px] md:h-[400px] xl:h-auto w-full flex items-center justify-center">
             <EarthCanvas />
         </div>
         <ProfileCard

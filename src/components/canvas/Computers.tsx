@@ -6,11 +6,11 @@ import { Mesh } from 'three';
 import CanvasLoader from "../layout/Loader";
 
 const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
-  const computer = useGLTF("./desktop_pc/scene.gltf");
+  const computer = useGLTF("./ship_in_a_bottle.glb");
   const meshRef = useRef<Mesh>(null!);
 
   useFrame(() => {
-    if (isMobile && meshRef.current) {
+    if (meshRef.current) {
       meshRef.current.rotation.y += 0.005;
     }
   });
@@ -19,19 +19,19 @@ const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     <mesh ref={meshRef}>
       <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
-        position={[-20, 50, 10]}
-        angle={0.12}
+        position={[20, 15, 0]}
+        angle={0.6}
         penumbra={1}
-        intensity={1}
+        intensity={1500}
         castShadow
         shadow-mapSize={1024}
       />
-      <pointLight intensity={10} />
+      <pointLight intensity={500} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.234 : 0.65}
-        position={isMobile ? [-2, -1.75, -2.2] : [0, -2.5, -4.5]}
-        rotation={isMobile ? [-0.01, 0, -0.1] : [-0.01, -1, -0.1]}
+        scale={isMobile ? 1.0 : 2.0}
+        position={isMobile ? [4.0, -1.5, 0] : [4.0, -3.5, 0]}
+        rotation={[0, 0, 0]}
       />
     </mesh>
   );
@@ -63,9 +63,9 @@ const ComputersCanvas = () => {
 
   return (
     <Canvas
-      frameloop={isMobile ? "always" : "demand"}
+      frameloop="always"
       shadows
-      dpr={[1, 2]}
+      dpr={[1, 1.5]} /* Adjusted dpr for better performance on various devices */
       camera={{ position: [20, 3, 5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true }}
     >
@@ -76,6 +76,7 @@ const ComputersCanvas = () => {
             enableZoom={false}
             maxPolarAngle={Math.PI / 2}
             minPolarAngle={Math.PI / 2}
+            target={[0, -3.0, 0]}
           />
         )}
         <Computers isMobile={isMobile} />
