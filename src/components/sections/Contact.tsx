@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
-import { EarthCanvas } from "../canvas";
+import { PirateMapCanvas } from "../canvas";
 import { SectionWrapper } from "../../hoc";
 import { slideIn } from "../../utils/motion";
-import ProfileCard from "../ProfileCard";
+import UserProfileCard from "../UserProfileCard";
 
 const Contact = () => {
   return (
@@ -15,9 +15,9 @@ const Contact = () => {
         className="xl:flex-1 flex flex-col items-center justify-center gap-10"
       >
         <div className="h-[300px] md:h-[400px] xl:h-auto w-full flex items-center justify-center">
-            <EarthCanvas />
+            <PirateMapCanvas />
         </div>
-        <ProfileCard
+        <UserProfileCard
           name="Jevon"
           title="Serpent Kiss' Captain"
           handle="jevon.n.shield"

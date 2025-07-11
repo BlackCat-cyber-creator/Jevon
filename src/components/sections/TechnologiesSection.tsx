@@ -1,9 +1,9 @@
-import { BallCanvas } from "../canvas";
+import { TechBallCanvas } from "../canvas";
 import { SectionWrapper } from "../../hoc";
 import { technologies } from "../../constants";
 import { useState, useEffect } from "react";
 
-const Tech = () => {
+const TechnologiesSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Tech = () => {
                 className="w-full h-full object-contain"
               />
             ) : (
-              <BallCanvas icon={technology.icon} />
+              <TechBallCanvas icon={technology.icon} />
             )}
           </div>
         ))}
@@ -48,4 +48,4 @@ const Tech = () => {
   );
 };
 
-export default SectionWrapper(Tech, "tech");
+export default SectionWrapper(TechnologiesSection, "tech");

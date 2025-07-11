@@ -43,7 +43,7 @@ const ServiceCard: React.FC<IServiceCard> = ({ index, title, icon }) => (
   </Tilt>
 );
 
-const About = () => {
+const AboutSection = () => {
   return (
     <>
       <Header useMotion={true} {...config.sections.about} />
@@ -64,4 +64,4 @@ const About = () => {
   );
 };
 
-export default SectionWrapper(About, "about");
+export default SectionWrapper(AboutSection, "about");

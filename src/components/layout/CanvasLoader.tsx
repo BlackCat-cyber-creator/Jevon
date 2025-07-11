@@ -1,7 +1,16 @@
 import { Html, useProgress } from "@react-three/drei";
+import { useState, useEffect } from "react";
 
-const Loader = () => {
+const CanvasLoader = () => {
   const { progress } = useProgress();
+  const [displayProgress, setDisplayProgress] = useState(0);
+
+  useEffect(() => {
+    if (progress > displayProgress) {
+      setDisplayProgress(progress);
+    }
+  }, [progress, displayProgress]);
+
   return (
     <Html>
       <span className="canvas-load">
@@ -13,11 +22,11 @@ const Loader = () => {
             marginTop: 40,
           }}
         >
-          {progress.toFixed(2)}
+          {displayProgress.toFixed(2)}%
         </p>
       </span>
     </Html>
   );
 };
 
-export default Loader;
+export default CanvasLoader;

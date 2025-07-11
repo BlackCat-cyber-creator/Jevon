@@ -26,12 +26,12 @@ type TConfig = {
 export const config: TConfig = {
   html: {
     title: "Cap'n J's Treasure Map",
-    fullName: "Cap'n Jevon, Master of the Code Seas",
+    fullName: "Jevon Naldo Yoshield",
     email: "jevonyoshield@mail.com", // Keeping practical email as is
   },
   hero: {
     name: "Cap'n J",
-    p: ["I forge grand visual tales,", "charts for yer crew, and webs o' wonder for the digital seas."],
+    p: ["I forge grand visual tales", "and webs o' wonder for yer crew."],
   },
   contact: {
     p: "Send yer message, matey",
@@ -41,10 +41,8 @@ export const config: TConfig = {
     about: {
       p: "A Seadog's Tale",
       h2: "My Voyage.",
-      content: `A seasoned software buccaneer with mastery o' TypeScript, JavaScript,
-        React, Node.js, and Three.js. I learn quick as a scurvy dog and collaborate with fellow captains
-        to forge swift, mighty, and easy-to-sail solutions. Let's join forces
-        and bring yer grandest visions to life, arr!`,
+      content: `A swift software buccaneer mastering the enigmatic script. I partner with fellow captains to craft
+        robust solutions and bring grand visions to life.`,
     },
     experience: {
       p: "My Adventures So Far",
@@ -57,10 +55,8 @@ export const config: TConfig = {
     works: {
       p: "My Booty",
       h2: "Grand Heists.",
-      content: `Behold, me skills showcased through real-world ventures with brief charts,
-        links to the code's treasure, and live demonstrations. This be a testament
-        to my knack for conquerin' knotty problems, wieldin' diverse technologies,
-        and steerin' projects with a firm hand.`,
+      content: `My skills unveiled through real-world projects, with code and live demos.
+        A testament to solving knotty problems with diverse technologies.`,
     },
   },
 };

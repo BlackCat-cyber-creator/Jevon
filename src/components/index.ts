@@ -1,32 +1,32 @@
 // @ts-nocheck
 import {
-  EarthCanvas,
-  BallCanvas,
-  ComputersCanvas,
-  StarsCanvas,
+  PirateMapCanvas,
+  TechBallCanvas,
+  ShipInBottleCanvas,
+  StarsBackgroundCanvas,
 } from "./canvas";
-import Hero from "./sections/Hero";
+import HeroSection from "./sections/HeroSection";
 import Navbar from "./layout/Navbar";
-import About from "./sections/About";
-import Tech from "./sections/Tech";
-import Experience from "./sections/Experience";
-import Works from "./sections/Works";
-import Feedbacks from "./sections/Feedbacks";
+import AboutSection from "./sections/AboutSection";
+import TechnologiesSection from "./sections/TechnologiesSection";
+import ExperienceSection from "./sections/ExperienceSection";
+import ProjectsSection from "./sections/ProjectsSection";
+import TestimonialsSection from "./sections/TestimonialsSection";
 import Contact from "./sections/Contact";
-import CanvasLoader from "./layout/Loader";
+import CanvasLoader from "./layout/CanvasLoader";
 
 export {
-  Hero,
+  HeroSection,
   Navbar,
-  About,
-  Tech,
-  Experience,
-  Works,
-  Feedbacks,
+  AboutSection,
+  TechnologiesSection,
+  ExperienceSection,
+  ProjectsSection,
+  TestimonialsSection,
   Contact,
   CanvasLoader,
-  EarthCanvas,
-  BallCanvas,
-  ComputersCanvas,
-  StarsCanvas,
+  PirateMapCanvas,
+  TechBallCanvas,
+  ShipInBottleCanvas,
+  StarsBackgroundCanvas,
 };

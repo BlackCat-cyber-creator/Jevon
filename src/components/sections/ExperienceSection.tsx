@@ -56,7 +56,7 @@ const ExperienceCard: React.FC<TExperience> = (experience) => {
   );
 };
 
-const Experience = () => {
+const ExperienceSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -95,4 +95,4 @@ const Experience = () => {
   );
 };
 
-export default SectionWrapper(Experience, "work");
+export default SectionWrapper(ExperienceSection, "work");

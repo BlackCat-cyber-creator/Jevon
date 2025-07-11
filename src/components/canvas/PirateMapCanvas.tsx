@@ -3,9 +3,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import * as THREE from 'three';
 
-import CanvasLoader from "../layout/Loader";
+import CanvasLoader from "../layout/CanvasLoader";
 
-const Earth = () => {
+const PirateMap = () => {
   const earth = useGLTF("./pirates_map.glb");
   const ref = useRef<THREE.Group>(null);
 
@@ -21,9 +21,9 @@ const Earth = () => {
   );
 };
 
-const MemoizedEarth = memo(Earth);
+const MemoizedPirateMap = memo(PirateMap);
 
-const EarthCanvas = () => {
+const PirateMapCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const EarthCanvas = () => {
             target={[0, 0, 0]}
           />
         )}
-        <MemoizedEarth />
+        <MemoizedPirateMap />
 
         <Preload all />
       </Suspense>
@@ -89,4 +89,4 @@ const EarthCanvas = () => {
   );
 };
 
-export default EarthCanvas;
+export default PirateMapCanvas;

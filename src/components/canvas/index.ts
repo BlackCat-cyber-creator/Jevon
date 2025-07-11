@@ -1,6 +1,6 @@
-import EarthCanvas from "./Earth";
-import BallCanvas from "./Ball";
-import ComputersCanvas from "./Computers";
-import StarsCanvas from "./Stars";
+import PirateMapCanvas from "./PirateMapCanvas";
+import TechBallCanvas from "./TechBall";
+import ShipInBottleCanvas from "./ShipInBottleCanvas";
+import StarsBackgroundCanvas from "./StarsBackground";
 
-export { EarthCanvas, BallCanvas, ComputersCanvas, StarsCanvas };
+export { PirateMapCanvas, TechBallCanvas, ShipInBottleCanvas, StarsBackgroundCanvas };

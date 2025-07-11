@@ -71,7 +71,7 @@ const ProjectCard: React.FC<{ index: number; isMobile: boolean } & TProject> = (
   );
 };
 
-const Works = () => {
+const ProjectsSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -119,4 +119,4 @@ const Works = () => {
   );
 };
 
-export default SectionWrapper(Works, "");
+export default SectionWrapper(ProjectsSection, "");

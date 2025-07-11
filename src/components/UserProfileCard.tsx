@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "./ProfileCard.css";
 
-interface ProfileCardProps {
+interface UserProfileCardProps {
   avatarUrl?: string;
   iconUrl?: string;
   grainUrl?: string;
@@ -67,7 +67,7 @@ const adjust = (
 const easeInOutCubic = (x: number): number =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
-const ProfileCardComponent: React.FC<ProfileCardProps> = ({
+const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
   avatarUrl,
   iconUrl,
   grainUrl,
@@ -338,6 +338,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   );
 };
 
-const ProfileCard = React.memo(ProfileCardComponent);
+const UserProfileCard = React.memo(UserProfileCardComponent);
 
-export default ProfileCard; 
+export default UserProfileCard; 

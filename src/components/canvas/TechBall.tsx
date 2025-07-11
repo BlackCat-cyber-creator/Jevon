@@ -8,9 +8,9 @@ import {
   useTexture,
 } from "@react-three/drei";
 
-import CanvasLoader from "../layout/Loader";
+import CanvasLoader from "../layout/CanvasLoader";
 
-const Ball = (props: any) => {
+const TechBall = (props: any) => {
   const [decal] = useTexture([props.imgUrl]);
 
   return (
@@ -37,7 +37,7 @@ const Ball = (props: any) => {
   );
 };
 
-const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
+const TechBallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
 
   return (
     <Canvas
@@ -48,7 +48,7 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
       <Suspense fallback={<CanvasLoader />}>
         {/* Render OrbitControls only if not mobile to allow page scrolling */}
         <OrbitControls enablePan={false} enableZoom={false} />
-        <Ball imgUrl={icon} />
+        <TechBall imgUrl={icon} />
       </Suspense>
 
       <Preload all />
@@ -56,4 +56,4 @@ const BallCanvas: React.FC<{ icon: string }> = ({ icon }) => {
   );
 };
 
-export default BallCanvas;
+export default TechBallCanvas;

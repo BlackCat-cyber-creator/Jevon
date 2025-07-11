@@ -3,21 +3,21 @@ import { Suspense, lazy } from "react";
 import Lenis from 'lenis';
 
 import {
-  About,
+  AboutSection,
   // Contact,
-  Experience,
-  Feedbacks,
-  Hero,
+  ExperienceSection,
+  TestimonialsSection,
+  HeroSection,
   Navbar,
-  Tech,
-  Works,
+  TechnologiesSection,
+  ProjectsSection,
   // StarsCanvas,
 } from "./components";
 import { useEffect } from "react"; // Removed useRef as touchStartY is no longer needed
 import { config } from "./constants/config";
 
 const Contact = lazy(() => import("./components/sections/Contact"));
-const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
+const StarsBackgroundCanvas = lazy(() => import("./components/canvas/StarsBackground"));
 
 const App = () => {
   // Removed touchStartY as it's no longer needed with Lenis
@@ -55,19 +55,19 @@ const App = () => {
       <div className="bg-primary relative z-0">
         <div className="bg-hero-pattern bg-cover bg-center bg-no-repeat">
           <Navbar />
-          <Hero />
+          <HeroSection />
         </div>
-        <About />
-        <Experience />
-        <Tech />
-        <Works />
-        <Feedbacks />
+        <AboutSection />
+        <ExperienceSection />
+        <TechnologiesSection />
+        <ProjectsSection />
+        <TestimonialsSection />
         <div className="relative z-0">
-          <Suspense fallback={<div>Loading Contact...</div>}>
+          <Suspense fallback={null}>
             <Contact />
           </Suspense>
-          <Suspense fallback={<div>Loading Stars...</div>}>
-            <StarsCanvas />
+          <Suspense fallback={null}>
+            <StarsBackgroundCanvas />
           </Suspense>
         </div>
       </div>

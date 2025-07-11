@@ -3,9 +3,9 @@ import { Suspense, lazy } from "react";
 import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
 
-const ComputersCanvas = lazy(() => import("../canvas/Computers"));
+const ShipInBottleCanvas = lazy(() => import("../canvas/ShipInBottleCanvas"));
 
-const Hero = () => {
+const HeroSection = () => {
   return (
     <section className={`relative mx-auto h-screen w-full`}>
       <div
@@ -27,11 +27,11 @@ const Hero = () => {
         </div>
       </div>
 
-      <Suspense fallback={<div>Loading Ship...</div>}>
-        <ComputersCanvas />
+      <Suspense fallback={null}>
+        <ShipInBottleCanvas />
       </Suspense>
     </section>
   );
 };
 
-export default Hero;
+export default HeroSection;

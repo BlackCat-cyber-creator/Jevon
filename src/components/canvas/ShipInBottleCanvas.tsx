@@ -3,9 +3,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import { Mesh } from 'three';
 
-import CanvasLoader from "../layout/Loader";
+import CanvasLoader from "../layout/CanvasLoader";
 
-const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const computer = useGLTF("./ship_in_a_bottle.glb");
   const meshRef = useRef<Mesh>(null!);
 
@@ -39,7 +39,7 @@ const Computers: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   );
 };
 
-const ComputersCanvas = () => {
+const ShipInBottleCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -81,11 +81,11 @@ const ComputersCanvas = () => {
             target={[0, -3.0, 0]}
           />
         )}
-        <Computers isMobile={isMobile} />
+        <ShipInBottle isMobile={isMobile} />
       </Suspense>
       <Preload all />
     </Canvas>
   );
 };
 
-export default ComputersCanvas;
+export default ShipInBottleCanvas;

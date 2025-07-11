@@ -47,7 +47,7 @@ const FeedbackCard: React.FC<{ index: number } & TTestimonial> = ({
   </motion.div>
 );
 
-const Feedbacks = () => {
+const TestimonialsSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -84,4 +84,4 @@ const Feedbacks = () => {
   );
 };
 
-export default Feedbacks;
+export default TestimonialsSection;
