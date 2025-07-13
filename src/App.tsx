@@ -13,7 +13,7 @@ import {
   ProjectsSection,
   // StarsCanvas,
 } from "./components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { config } from "./constants/config";
 
 const Contact = lazy(() => import("./components/sections/Contact"));
@@ -22,29 +22,6 @@ const StarsBackgroundCanvas = lazy(() => import("./components/canvas/StarsBackgr
 const App = () => {
   // Removed touchStartY as it's no longer needed with Lenis
   // const touchStartY = useRef(0);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-
-    // Set the initial value of the `isMobile` state variable
-    setIsMobile(mediaQuery.matches);
-
-    // Define a callback function to handle changes to the media query
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-
-    // Add the callback function as a listener for changes to the media query
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-
-    // Remove the listener when the component is unmounted
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
-  }, []);
 
   useEffect(() => {
     // Scroll to the top of the page on component mount/refresh
@@ -89,11 +66,9 @@ const App = () => {
           <Suspense fallback={null}>
             <Contact />
           </Suspense>
-          {!isMobile && (
-            <Suspense fallback={null}>
-              <StarsBackgroundCanvas />
-            </Suspense>
-          )}
+          <Suspense fallback={null}>
+            <StarsBackgroundCanvas />
+          </Suspense>
         </div>
       </div>
     </BrowserRouter>

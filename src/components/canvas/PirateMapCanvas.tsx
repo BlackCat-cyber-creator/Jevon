@@ -9,22 +9,8 @@ const PirateMap = () => {
   const earth = useGLTF("./pirates_map.glb");
   const ref = useRef<THREE.Group>(null);
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
-  }, []);
-
   useFrame((state, delta) => {
-    if (ref.current && !isMobile) {
+    if (ref.current) {
       ref.current.rotation.y += delta * 0.5;
       ref.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1 - 1;
     }
