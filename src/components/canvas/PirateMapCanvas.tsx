@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 import CanvasLoader from "../layout/CanvasLoader";
 
-const PirateMap = () => {
+const PirateMap: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const earth = useGLTF("./pirates_map.glb");
   const ref = useRef<THREE.Group>(null);
 
@@ -17,7 +17,7 @@ const PirateMap = () => {
   });
 
   return (
-    <primitive object={earth.scene} scale={8} position-y={-1} rotation-y={0} ref={ref} />
+    <primitive object={earth.scene} scale={isMobile ? 3 : 8} position-y={isMobile ? -0.5 : -1} rotation-y={0} ref={ref} />
   );
 };
 
@@ -60,12 +60,12 @@ const PirateMapCanvas = () => {
         position: [-4, 3, 6],
       }}
     >
-      <hemisphereLight intensity={0.15} groundColor="black" />
+      <hemisphereLight intensity={0.1} groundColor="black" />
       <spotLight
         position={[-10, 15, 10]}
         angle={0.5}
         penumbra={1}
-        intensity={isMobile ? 500 : 1500}
+        intensity={isMobile ? 300 : 1500}
         castShadow
         shadow-mapSize={isMobile ? 512 : 1024}
       />
@@ -81,7 +81,7 @@ const PirateMapCanvas = () => {
             target={[0, 0, 0]}
           />
         )}
-        <MemoizedPirateMap />
+        <MemoizedPirateMap isMobile={isMobile} />
 
         <Preload all />
       </Suspense>
