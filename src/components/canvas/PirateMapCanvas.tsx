@@ -57,7 +57,7 @@ const PirateMapCanvas = () => {
         fov: isMobile ? 55 : 45,
         near: 0.1,
         far: 200,
-        position: isMobile ? [-2, 1, 4] : [-4, 3, 6],
+        position: [-4, 3, 6],
       }}
     >
       <hemisphereLight intensity={0.15} groundColor="black" />
