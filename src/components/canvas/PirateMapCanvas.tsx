@@ -28,7 +28,7 @@ const PirateMapCanvas = () => {
 
   useEffect(() => {
     // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
@@ -57,7 +57,7 @@ const PirateMapCanvas = () => {
         fov: isMobile ? 55 : 45,
         near: 0.1,
         far: 200,
-        position: [-4, 3, 6],
+        position: isMobile ? [-2, 1, 4] : [-4, 3, 6],
       }}
     >
       <hemisphereLight intensity={0.15} groundColor="black" />
