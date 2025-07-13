@@ -62,14 +62,14 @@ const PirateMapCanvas = () => {
     >
       <hemisphereLight intensity={0.1} groundColor="black" />
       <spotLight
-        position={[-10, 15, 10]}
+        position={[0, 15, 0]}
         angle={0.5}
         penumbra={1}
-        intensity={isMobile ? 300 : 1500}
+        intensity={isMobile ? 300 : 600}
         castShadow
-        shadow-mapSize={isMobile ? 256 : 1024}
+        shadow-mapSize={isMobile ? 512 : 1024}
       />
-      <pointLight intensity={isMobile ? 100 : 500} position={[0, 0, -30]} />
+      <pointLight intensity={isMobile ? 200 : 400} position={[0, 10, -5]} />
       <Suspense fallback={<CanvasLoader />}>
         {!isMobile && (
           <OrbitControls
