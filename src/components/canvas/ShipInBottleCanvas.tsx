@@ -24,15 +24,15 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         position={[20, 15, 0]}
         angle={0.6}
         penumbra={1}
-        intensity={1500}
+        intensity={isMobile ? 500 : 1500}
         castShadow
-        shadow-mapSize={1024}
+        shadow-mapSize={isMobile ? 512 : 1024}
       />
-      <pointLight intensity={500} />
+      <pointLight intensity={isMobile ? 200 : 500} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 1.0 : 2.0}
-        position={isMobile ? [4.0, -1.5, 0] : [4.0, -3.5, 0]}
+        scale={isMobile ? 1.2 : 2.0}
+        position={isMobile ? [3.0, -1.5, 0] : [5.0, -3.5, 0]}
         rotation={[0, 0, 0]}
       />
     </mesh>
@@ -67,7 +67,7 @@ const ShipInBottleCanvas = () => {
     <Canvas
       frameloop="always"
       shadows
-      dpr={[1, 1.5]} /* Adjusted dpr for better performance on various devices */
+      dpr={isMobile ? [1, 1] : [1, 1.5]} /* Adjusted dpr for better performance on various devices */
       camera={{ position: [20, 3, 5], fov: isMobile ? 35 : 25 }}
       gl={{ preserveDrawingBuffer: true }}
     >

@@ -5,10 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.pirata-one-font {
-  font-family: 'Pirata One', cursive;
-}
-
 * {
   margin: 0;
   padding: 0;

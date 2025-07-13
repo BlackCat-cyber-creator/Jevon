@@ -29,10 +29,9 @@ const Navbar = () => {
 
       sections.forEach((current) => {
         const sectionId = current.getAttribute("id");
-        // @ts-ignore
-        const sectionHeight = current.offsetHeight;
+        const sectionHeight = (current as HTMLElement).offsetHeight;
         const sectionTop =
-          current.getBoundingClientRect().top - sectionHeight * 0.2;
+          (current as HTMLElement).getBoundingClientRect().top - sectionHeight * 0.2;
 
         if (sectionTop < 0 && sectionTop + sectionHeight > 0) {
           setActive(sectionId);
