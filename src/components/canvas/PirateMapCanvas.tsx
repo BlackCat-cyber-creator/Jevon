@@ -5,12 +5,12 @@ import * as THREE from 'three';
 
 import CanvasLoader from "../layout/CanvasLoader";
 
-const PirateMap = ({ isMobile }: { isMobile: boolean }) => {
+const PirateMap = () => {
   const earth = useGLTF("./pirates_map.glb");
   const ref = useRef<THREE.Group>(null);
 
   useFrame((state, delta) => {
-    if (ref.current && !isMobile) {
+    if (ref.current) {
       ref.current.rotation.y += delta * 0.5;
       ref.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1 - 1;
     }
@@ -28,7 +28,7 @@ const PirateMapCanvas = () => {
 
   useEffect(() => {
     // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
 
     // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
@@ -71,17 +71,15 @@ const PirateMapCanvas = () => {
       />
       <pointLight intensity={isMobile ? 200 : 500} position={[0, 0, -30]} />
       <Suspense fallback={<CanvasLoader />}>
-        {!isMobile && (
-          <OrbitControls
-            // autoRotate
-            enablePan={false}
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-            target={[0, 0, 0]}
-          />
-        )}
-        <MemoizedPirateMap isMobile={isMobile} />
+        <OrbitControls
+          // autoRotate
+          enablePan={false}
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+          target={[0, 0, 0]}
+        />
+        <MemoizedPirateMap />
 
         <Preload all />
       </Suspense>
