@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "./ProfileCard.css";
+import { useState } from "react";
 
 interface UserProfileCardProps {
   avatarUrl?: string;
@@ -86,6 +87,20 @@ const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLElement>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, []);
 
   const handleContactClick = () => {
     window.open("https://www.instagram.com/jevon.n.shield/", "_blank");
@@ -278,6 +293,9 @@ const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
       className={`pc-card-wrapper ${className}`.trim()}
       style={cardStyle}
     >
+      {isMobile && (
+        <img src="/src/assets/logo.png" alt="test logo" style={{ width: '50px', height: '50px', position: 'absolute', top: '10px', left: '10px', zIndex: 1000 }} />
+      )}
       <section ref={cardRef} className="pc-card">
         <div className="pc-inside">
           <div className="pc-shine" />
