@@ -25,8 +25,9 @@ module.exports = {
       },
       keyframes: {
         wobble: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-5px)' },
+          '0%': { transform: 'translate(0, 0) scale(1) rotate(-0.5deg)' },
+          '50%': { transform: 'translate(2px, -7px) scale(1.03) rotate(0.5deg)' },
+          '100%': { transform: 'translate(0, 0) scale(1) rotate(-0.5deg)' },
         }
       },
       animation: {
