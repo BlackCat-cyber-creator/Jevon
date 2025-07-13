@@ -10,7 +10,7 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const meshRef = useRef<Mesh>(null!);
 
   useFrame((state) => {
-    if (meshRef.current) {
+    if (meshRef.current && !isMobile) {
       // Apply rotation and sway for both mobile and desktop
       meshRef.current.rotation.y += 0.005; // Existing rotation
       meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1; // Only apply the oscillating sway
@@ -44,7 +44,7 @@ const ShipInBottleCanvas = () => {
 
   useEffect(() => {
     // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
