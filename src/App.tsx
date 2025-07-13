@@ -35,7 +35,7 @@ const App = () => {
     const lenis = new Lenis({
       lerp: 0.1, // Adjust this value for overall scroll smoothness/speed (lower = smoother/slower)
       wheelMultiplier: 0.7, // Adjust this for mouse wheel sensitivity (lower = slower response)
-      touchMultiplier: 0.7, // Adjust this for touch scroll sensitivity (lower = slower response)
+      touchMultiplier: 0.5, // Adjust this for touch scroll sensitivity (lower = slower response)
       autoRaf: true, // Automatically run requestAnimationFrame loop
     });
 
