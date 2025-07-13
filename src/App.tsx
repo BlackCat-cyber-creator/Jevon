@@ -13,7 +13,7 @@ import {
   ProjectsSection,
   // StarsCanvas,
 } from "./components";
-import { useEffect } from "react"; // Removed useRef as touchStartY is no longer needed
+import { useEffect, useState } from "react"; // Removed useRef as touchStartY is no longer needed
 import { config } from "./constants/config";
 
 const Contact = lazy(() => import("./components/sections/Contact"));
@@ -22,6 +22,7 @@ const StarsBackgroundCanvas = lazy(() => import("./components/canvas/StarsBackgr
 const App = () => {
   // Removed touchStartY as it's no longer needed with Lenis
   // const touchStartY = useRef(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Scroll to the top of the page on component mount/refresh
@@ -30,6 +31,20 @@ const App = () => {
     if (document.title !== config.html.title) {
       document.title = config.html.title;
     }
+
+    // Add a media query listener for mobile devices
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+    // Set the initial value of the `isMobile` state variable
+    setIsMobile(mediaQuery.matches);
+
+    // Define a callback function to handle changes to the media query
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    // Add the callback function as a listener for changes to the media query
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
 
     // Initialize Lenis for smooth scrolling
     const lenis = new Lenis({
@@ -44,9 +59,10 @@ const App = () => {
     //   console.log(e);
     // });
 
-    // Cleanup: destroy lenis instance when component unmounts
+    // Cleanup: destroy lenis instance and remove the listener when component unmounts
     return () => {
       lenis.destroy();
+      mediaQuery.removeEventListener('change', handleMediaQueryChange);
     };
   }, []); // Empty dependency array means this runs once on mount
 
@@ -66,9 +82,11 @@ const App = () => {
           <Suspense fallback={null}>
             <Contact />
           </Suspense>
-          <Suspense fallback={null}>
-            <StarsBackgroundCanvas />
-          </Suspense>
+          {!isMobile && (
+            <Suspense fallback={null}>
+              <StarsBackgroundCanvas />
+            </Suspense>
+          )}
         </div>
       </div>
     </BrowserRouter>

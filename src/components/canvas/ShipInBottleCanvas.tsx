@@ -24,11 +24,11 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         position={[20, 15, 0]}
         angle={0.6}
         penumbra={1}
-        intensity={isMobile ? 500 : 1000}
+        intensity={isMobile ? 300 : 1000}
         castShadow
         shadow-mapSize={isMobile ? 512 : 1024}
       />
-      <pointLight intensity={isMobile ? 250 : 500} />
+      <pointLight intensity={isMobile ? 200 : 500} />
       <primitive
         object={computer.scene}
         scale={isMobile ? 1.2 : 2.0}
