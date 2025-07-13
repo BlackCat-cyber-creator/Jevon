@@ -71,14 +71,16 @@ const PirateMapCanvas = () => {
       />
       <pointLight intensity={isMobile ? 200 : 500} position={[0, 0, -30]} />
       <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          // autoRotate
-          enablePan={false}
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-          target={[0, 0, 0]}
-        />
+        {!isMobile && (
+          <OrbitControls
+            // autoRotate
+            enablePan={false}
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+            target={[0, 0, 0]}
+          />
+        )}
         <MemoizedPirateMap />
 
         <Preload all />
