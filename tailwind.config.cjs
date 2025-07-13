@@ -23,6 +23,15 @@ module.exports = {
       backgroundImage: {
         "hero-pattern": "url('/src/assets/herobg.png')",
       },
+      keyframes: {
+        wobble: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5px)' },
+        }
+      },
+      animation: {
+        wobble: 'wobble 5s ease-in-out infinite',
+      },
       fontFamily: {
         pirata: ["Pirata One", "cursive"],
       },

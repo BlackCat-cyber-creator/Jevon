@@ -8,6 +8,12 @@ const ShipInBottleCanvas = lazy(() => import("../canvas/ShipInBottleCanvas"));
 const HeroSection = () => {
   return (
     <section className={`relative mx-auto h-screen w-full`}>
+      {/* Background image container with wobble animation */}
+      <div
+        className="absolute inset-0 z-0 h-full w-full bg-hero-pattern bg-cover bg-no-repeat bg-center animate-wobble"
+      />
+
+      {/* Content container */}
       <div
         className={`absolute inset-0 top-[100px] mx-auto max-w-7xl ${styles.paddingX} flex flex-row items-start gap-5`}
       >
