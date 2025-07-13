@@ -47,7 +47,7 @@ const Contact = () => {
             avatarUrl="/jevon.png"
             miniAvatarUrl="/jevon.png"
             iconUrl="/insta.png"
-            grainUrl="src/assets/logo.png"
+            grainUrl="/logo.png"
             showUserInfo={true}
             enableTilt={true}
             className="mb-20"
@@ -70,7 +70,7 @@ const Contact = () => {
             avatarUrl="/jevon.png"
             miniAvatarUrl="/jevon.png"
             iconUrl="/insta.png"
-            grainUrl="src/assets/logo.png"
+            grainUrl="/logo.png"
             showUserInfo={true}
             enableTilt={true}
             className="mb-20"

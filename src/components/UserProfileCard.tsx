@@ -293,9 +293,6 @@ const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
       className={`pc-card-wrapper ${className}`.trim()}
       style={cardStyle}
     >
-      {isMobile && (
-        <img src="/src/assets/logo.png" alt="test logo" style={{ width: '50px', height: '50px', position: 'absolute', top: '10px', left: '10px', zIndex: 1000 }} />
-      )}
       <section ref={cardRef} className="pc-card">
         <div className="pc-inside">
           <div className="pc-shine" />
