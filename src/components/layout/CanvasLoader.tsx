@@ -1,7 +1,15 @@
 import { Html, useProgress } from "@react-three/drei";
+import { useState, useEffect } from "react";
 
 const CanvasLoader = () => {
   const { progress } = useProgress();
+  const [displayedProgress, setDisplayedProgress] = useState(0);
+
+  useEffect(() => {
+    if (progress > displayedProgress) {
+      setDisplayedProgress(progress);
+    }
+  }, [progress, displayedProgress]);
 
   return (
     <Html>
@@ -9,7 +17,7 @@ const CanvasLoader = () => {
         <p
           className="text-f1f1f1 mt-10 text-sm font-extrabold"
         >
-          {progress.toFixed(2)}%
+          {displayedProgress.toFixed(2)}%
         </p>
       </span>
     </Html>
