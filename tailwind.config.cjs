@@ -21,13 +21,13 @@ module.exports = {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/herobg.png')",
+        "hero-pattern": "url('/src/assets/herobg.webp')",
       },
       keyframes: {
         wobble: {
-          '0%': { transform: 'translate(0, 0) scale(1) rotate(-0.5deg)' },
-          '50%': { transform: 'translate(2px, -7px) scale(1.03) rotate(0.5deg)' },
-          '100%': { transform: 'translate(0, 0) scale(1) rotate(-0.5deg)' },
+          '0%': { transform: 'translate(0, -5px) scale(1) rotate(-0.5deg)' },
+          '50%': { transform: 'translate(2px, -10px) scale(1.03) rotate(0.5deg)' },
+          '100%': { transform: 'translate(0, -5px) scale(1) rotate(-0.5deg)' },
         }
       },
       animation: {

@@ -7,7 +7,7 @@ const ShipInBottleCanvas = lazy(() => import("../canvas/ShipInBottleCanvas"));
 
 const HeroSection = () => {
   return (
-    <section className={`relative mx-auto h-screen w-full`}>
+    <section className={`relative mx-auto h-screen w-full overflow-hidden`}>
       {/* Background image container with wobble animation */}
       <div
         className="absolute inset-0 z-0 h-full w-full bg-hero-pattern bg-cover bg-no-repeat bg-center animate-wobble"
