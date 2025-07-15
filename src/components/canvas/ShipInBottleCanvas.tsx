@@ -26,7 +26,7 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
         penumbra={1}
         intensity={isMobile ? 300 : 1000}
         castShadow
-        shadow-mapSize={isMobile ? 512 : 1024}
+        shadow-mapSize={isMobile ? 1024 : 2048}
       />
       <pointLight intensity={isMobile ? 200 : 500} />
       <primitive

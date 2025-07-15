@@ -51,10 +51,10 @@ const PirateMapCanvas = () => {
     <Canvas
       shadows
       frameloop="always"
-      dpr={[1, 2]}
+      dpr={isMobile ? [1, 1] : [1, 1.5]}
       gl={{ preserveDrawingBuffer: true }}
       camera={{
-        fov: 45,
+        fov: isMobile ? 55 : 45,
         near: 0.1,
         far: 200,
         position: [-4, 3, 6],
@@ -65,11 +65,11 @@ const PirateMapCanvas = () => {
         position={[0, 15, 0]}
         angle={0.5}
         penumbra={1}
-        intensity={600}
+        intensity={isMobile ? 300 : 600}
         castShadow
-        shadow-mapSize={1024}
+        shadow-mapSize={isMobile ? 1024 : 2048}
       />
-      <pointLight intensity={400} position={[0, 10, -5]} />
+      <pointLight intensity={isMobile ? 200 : 400} position={[0, 10, -5]} />
       <Suspense fallback={<CanvasLoader />}>
         {!isMobile && (
           <OrbitControls
