@@ -10,7 +10,7 @@ const HeroSection = () => {
     <section className={`relative mx-auto h-screen w-full overflow-hidden`}>
       {/* Background image container with wobble animation */}
       <div
-        className="absolute inset-0 z-0 h-full w-full bg-hero-pattern bg-cover bg-no-repeat bg-center animate-wobble scale-110 sm:h-full h-[70vh]"
+        className="absolute inset-0 z-0 h-full w-full bg-hero-pattern bg-cover bg-no-repeat bg-center animate-wobble scale-110 sm:h-full h-[60vh]"
       />
 
       {/* Content container */}
