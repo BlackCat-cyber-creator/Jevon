@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 import CanvasLoader from "../layout/CanvasLoader";
 
-const PirateMap = () => {
+const PirateMap: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const earth = useGLTF("./pirates_map.glb");
   const ref = useRef<THREE.Group>(null);
 
@@ -17,7 +17,21 @@ const PirateMap = () => {
   });
 
   return (
-    <primitive object={earth.scene} scale={8} position-y={-1} rotation-y={0} ref={ref} />
+    <group>
+      <hemisphereLight intensity={0.1} groundColor="black" />
+      <spotLight
+        position={isMobile ? [0, 8, 3] : [0, 13, 3]} /* Adjusted position */
+        angle={0.5}
+        penumbra={1}
+        intensity={isMobile ? 300 : 600}
+        castShadow
+        shadow-mapSize={isMobile ? 1024 : 4096}
+      />
+      <pointLight intensity={isMobile ? 200 : 400} position={[0, 8, -3]} />
+      <group ref={ref}>
+        <primitive object={earth.scene} scale={8} position-y={0} rotation-y={0} />
+      </group>
+    </group>
   );
 };
 
@@ -60,16 +74,6 @@ const PirateMapCanvas = () => {
         position: [-4, 3, 6],
       }}
     >
-      <hemisphereLight intensity={0.1} groundColor="black" />
-      <spotLight
-        position={[0, 15, 0]}
-        angle={0.5}
-        penumbra={1}
-        intensity={isMobile ? 300 : 600}
-        castShadow
-        shadow-mapSize={isMobile ? 1024 : 2048}
-      />
-      <pointLight intensity={isMobile ? 200 : 400} position={[0, 10, -5]} />
       <Suspense fallback={<CanvasLoader />}>
         {!isMobile && (
           <OrbitControls
@@ -81,7 +85,7 @@ const PirateMapCanvas = () => {
             target={[0, 0, 0]}
           />
         )}
-        <MemoizedPirateMap />
+        <MemoizedPirateMap isMobile={isMobile} />
 
         <Preload all />
       </Suspense>

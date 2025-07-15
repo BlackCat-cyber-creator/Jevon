@@ -1,13 +1,13 @@
 import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-import { Mesh } from 'three';
+import { Group } from 'three';
 
 import CanvasLoader from "../layout/CanvasLoader";
 
 const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   const computer = useGLTF("./ship_in_a_bottle.glb");
-  const meshRef = useRef<Mesh>(null!);
+  const meshRef = useRef<Group>(null!);
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -18,24 +18,26 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
   });
 
   return (
-    <mesh ref={meshRef}>
+    <group>
       <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
-        position={[20, 15, 0]}
+        position={isMobile ? [10, 10, 5] : [15, 20, 10]}
         angle={0.6}
         penumbra={1}
         intensity={isMobile ? 300 : 1000}
         castShadow
-        shadow-mapSize={isMobile ? 1024 : 2048}
+        shadow-mapSize={isMobile ? 1024 : 4096}
       />
       <pointLight intensity={isMobile ? 200 : 500} />
-      <primitive
-        object={computer.scene}
-        scale={isMobile ? 1.2 : 2.0}
-        position={isMobile ? [2, -1.5, 0] : [5.0, -3.5, 0]}
-        rotation={[0, 0, 0]}
-      />
-    </mesh>
+      <group ref={meshRef}>
+        <primitive
+          object={computer.scene}
+          scale={isMobile ? 1.2 : 2.0}
+          position={isMobile ? [2, -1.5, 0] : [5.0, -3.5, 0]}
+          rotation={[0, 0, 0.05]}
+        />
+      </group>
+    </group>
   );
 };
 
