@@ -20,14 +20,14 @@ const PirateMap: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     <group>
       <hemisphereLight intensity={0.1} groundColor="black" />
       <spotLight
-        position={isMobile ? [0, 8, 3] : [0, 13, 3]} /* Adjusted position */
+        position={[0, 8, 3]} /* Adjusted position */
         angle={0.5}
         penumbra={1}
-        intensity={isMobile ? 300 : 600}
+        intensity={isMobile ? 100 : 300}
         castShadow
         shadow-mapSize={isMobile ? 1024 : 4096}
       />
-      <pointLight intensity={isMobile ? 200 : 400} position={[0, 8, -3]} />
+      <pointLight intensity={isMobile ? 100 : 300} position={[0, 8, -3]} />
       <group ref={ref}>
         <primitive object={earth.scene} scale={8} position-y={0} rotation-y={0} />
       </group>

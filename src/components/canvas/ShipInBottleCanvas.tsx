@@ -21,20 +21,20 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
     <group>
       <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
-        position={isMobile ? [10, 10, 5] : [15, 20, 10]}
+        position={isMobile ? [10, 10, 5] : [8, 16, 8]}
         angle={0.6}
         penumbra={1}
-        intensity={isMobile ? 300 : 1000}
+        intensity={isMobile ? 100 : 400}
         castShadow
         shadow-mapSize={isMobile ? 1024 : 4096}
       />
-      <pointLight intensity={isMobile ? 200 : 500} />
+      <pointLight intensity={isMobile ? 100 : 400} />
       <group ref={meshRef}>
         <primitive
           object={computer.scene}
           scale={isMobile ? 1.2 : 2.0}
           position={isMobile ? [2, -1.5, 0] : [5.0, -3.5, 0]}
-          rotation={[0, 0, 0.05]}
+          rotation={isMobile ? [0, 0, -0.05] : [0, 0, 0.05]}
         />
       </group>
     </group>
