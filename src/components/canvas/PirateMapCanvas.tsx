@@ -18,7 +18,7 @@ const PirateMap: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
 
   return (
     <group>
-      <hemisphereLight intensity={0.1} groundColor="black" />
+      <hemisphereLight intensity={0.5} groundColor="black" />
       <spotLight
         position={[0, 8, 3]} /* Adjusted position */
         angle={0.5}

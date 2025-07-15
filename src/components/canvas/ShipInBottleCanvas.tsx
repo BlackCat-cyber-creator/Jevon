@@ -19,9 +19,9 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
 
   return (
     <group>
-      <hemisphereLight intensity={0.15} groundColor="black" />
+      <hemisphereLight intensity={1} groundColor="black" />
       <spotLight
-        position={isMobile ? [10, 10, 5] : [8, 16, 8]}
+        position={isMobile ? [0, 0, 7] : [0, 0, 17]}
         angle={0.6}
         penumbra={1}
         intensity={isMobile ? 100 : 400}
@@ -34,7 +34,7 @@ const ShipInBottle: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
           object={computer.scene}
           scale={isMobile ? 1.2 : 2.0}
           position={isMobile ? [2, -1.5, 0] : [5.0, -3.5, 0]}
-          rotation={isMobile ? [0, 0, -0.05] : [0, 0, 0.05]}
+          rotation={isMobile ? [0, 0, 0] : [0, 0, 0.05]}
         />
       </group>
     </group>
