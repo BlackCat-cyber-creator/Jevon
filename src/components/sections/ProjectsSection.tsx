@@ -122,4 +122,4 @@ const ProjectsSection = () => {
   );
 };
 
-export default SectionWrapper(ProjectsSection, "");
+export default SectionWrapper(ProjectsSection, "work");

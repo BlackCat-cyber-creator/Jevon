@@ -3,15 +3,15 @@ import {
   PirateMapCanvas,
   TechBallCanvas,
   ShipInBottleCanvas,
-  StarsBackgroundCanvas,
+  // StarsBackgroundCanvas,
 } from "./canvas";
 import HeroSection from "./sections/HeroSection";
 import Navbar from "./layout/Navbar";
 import AboutSection from "./sections/AboutSection";
 import TechnologiesSection from "./sections/TechnologiesSection";
-import ExperienceSection from "./sections/ExperienceSection";
+// import ExperienceSection from "./sections/ExperienceSection";
 import ProjectsSection from "./sections/ProjectsSection";
-import TestimonialsSection from "./sections/TestimonialsSection";
+// import TestimonialsSection from "./sections/TestimonialsSection";
 import Contact from "./sections/Contact";
 import CanvasLoader from "./layout/CanvasLoader";
 
@@ -20,13 +20,11 @@ export {
   Navbar,
   AboutSection,
   TechnologiesSection,
-  ExperienceSection,
   ProjectsSection,
-  TestimonialsSection,
   Contact,
   CanvasLoader,
   PirateMapCanvas,
   TechBallCanvas,
   ShipInBottleCanvas,
-  StarsBackgroundCanvas,
+  // StarsBackgroundCanvas,
 };

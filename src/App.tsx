@@ -4,9 +4,6 @@ import Lenis from 'lenis';
 
 import {
   AboutSection,
-  // Contact,
-  ExperienceSection,
-  TestimonialsSection,
   HeroSection,
   Navbar,
   TechnologiesSection,
@@ -58,10 +55,8 @@ const App = () => {
           <HeroSection />
         </div>
         <AboutSection />
-        <ExperienceSection />
         <TechnologiesSection />
         <ProjectsSection />
-        <TestimonialsSection />
         <div className="relative z-0">
           <Suspense fallback={null}>
             <Contact />

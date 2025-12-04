@@ -4,8 +4,6 @@ import type {
 
 import { services } from "./services";
 import { technologies } from "./technologies";
-import { experiences } from "./experiences";
-import { testimonials } from "./testimonials";
 import { projects } from "./projects";
 
 export const navLinks: TNavLink[] = [
@@ -23,4 +21,4 @@ export const navLinks: TNavLink[] = [
   },
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+export { services, technologies, projects };
