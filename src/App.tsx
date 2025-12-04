@@ -8,13 +8,11 @@ import {
   Navbar,
   TechnologiesSection,
   ProjectsSection,
-  // StarsCanvas,
 } from "./components";
 import { useEffect } from "react";
 import { config } from "./constants/config";
 
 const Contact = lazy(() => import("./components/sections/Contact"));
-const StarsBackgroundCanvas = lazy(() => import("./components/canvas/StarsBackground"));
 
 const App = () => {
   // Removed touchStartY as it's no longer needed with Lenis
@@ -60,9 +58,6 @@ const App = () => {
         <div className="relative z-0">
           <Suspense fallback={null}>
             <Contact />
-          </Suspense>
-          <Suspense fallback={null}>
-            <StarsBackgroundCanvas />
           </Suspense>
         </div>
       </div>

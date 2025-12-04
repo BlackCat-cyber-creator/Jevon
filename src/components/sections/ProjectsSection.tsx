@@ -30,16 +30,16 @@ const ProjectCard: React.FC<{ index: number; isMobile: boolean } & TProject> = (
         <div className="card-img_hover absolute inset-0 m-3 flex justify-end">
           {/* Website link */}
           {websiteLink && (
-            <div
+          <div
               onClick={() => window.open(websiteLink, "_blank")}
-              className="black-gradient flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
-            >
-              <img
+            className="black-gradient flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
+          >
+            <img
                 src={favicon}
                 alt="website"
-                className="h-1/2 w-1/2 object-contain"
-              />
-            </div>
+              className="h-1/2 w-1/2 object-contain"
+            />
+          </div>
           )}
         </div>
       </div>
