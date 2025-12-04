@@ -7,12 +7,15 @@ const ShipInBottleCanvas = lazy(() => import("../canvas/ShipInBottleCanvas"));
 
 const HeroSection = () => {
   return (
-    <section className={`relative mx-auto h-screen w-full overflow-hidden`}>
-      {/* Background image container with wobble animation */}
-      <div
-        className="absolute inset-0 z-0 h-full w-full bg-hero-pattern bg-cover bg-no-repeat bg-center animate-wobble scale-110 sm:h-full h-[60vh]"
-      />
-
+    <section className="relative w-full h-screen mx-auto">
+      <video
+        className="absolute inset-0 z-0 w-full h-full object-cover"
+        src="/herobg.webm"
+        autoPlay
+        loop
+        muted
+        playsInline
+      ></video>
       {/* Content container */}
       <div
         className={`absolute inset-0 top-[100px] mx-auto max-w-7xl ${styles.paddingX} flex flex-row items-start gap-5`}

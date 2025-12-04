@@ -45,8 +45,8 @@ export const config: TConfig = {
         robust solutions and bring grand visions to life.`,
     },
     experience: {
-      p: "My Adventures So Far",
-      h2: "My Plunders.",
+      p: "",
+      h2: "",
     },
     feedbacks: {
       p: "What the Crew Whispers",

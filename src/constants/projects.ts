@@ -3,10 +3,34 @@ import type {
 } from "../types";
 
 import aidoc from "../assets/aidoc.png";
+import pertamina from "../assets/Pertamina.png";
 import jobit from "../assets/jobit.png";
 import tripguide from "../assets/tripguide.png";
 
 const projects: TProject[] = [
+  {
+    name: "Pertamina Booking",
+    description:
+      "A comprehensive fuel booking web application with 3 roles: admin, staff, and driver that allows drivers to refuel efficiently and conveniently to solve traffic problems in Indonesia.",
+    tags: [ 
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "firebase",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwind",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: pertamina,
+
+    websiteLink: "https://studio--studio-1002881994-2b7ff.us-central1.hosted.app/",
+    favicon: "https://studio--studio-1002881994-2b7ff.us-central1.hosted.app/favicon.ico",
+  },
   {
     name: "AIDOC",
     description:
@@ -26,7 +50,9 @@ const projects: TProject[] = [
       },
     ],
     image: aidoc,
-    sourceCodeLink: "https://github.com/BlackCat-cyber-creator/AIDOC",
+
+    websiteLink: "https://studio--aidoc-ze7io.us-central1.hosted.app/",
+    favicon: "https://studio--aidoc-ze7io.us-central1.hosted.app/favicon.ico",
   },
   {
     name: "Job IT",
@@ -47,7 +73,8 @@ const projects: TProject[] = [
       },
     ],
     image: jobit,
-    sourceCodeLink: "https://github.com/",
+    websiteLink: "https://job-it-clone-chi.vercel.app/",
+    favicon: "https://www.google.com/s2/favicons?domain=job-it-clone-chi.vercel.app",
   },
   {
     name: "Trip Guide",
@@ -68,7 +95,8 @@ const projects: TProject[] = [
       },
     ],
     image: tripguide,
-    sourceCodeLink: "https://github.com/",
+    websiteLink: "https://trip-guide-nu.vercel.app/",
+    favicon: "https://www.google.com/s2/favicons?domain=trip-guide-nu.vercel.app",
   },
 ];
 

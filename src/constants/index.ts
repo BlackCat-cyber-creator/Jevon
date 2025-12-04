@@ -15,11 +15,11 @@ export const navLinks: TNavLink[] = [
   },
   {
     id: "work",
-    title: "My Plunders",
+    title: "My Booty",
   },
   {
     id: "contact",
-    title: "Hail Me!",
+    title: "Hail Captain!",
   },
 ];
 
