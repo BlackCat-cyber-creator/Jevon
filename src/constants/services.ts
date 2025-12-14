@@ -9,19 +9,19 @@ import creator from "../assets/creator.png";
 
 const services: TService[] = [
   {
-    title: "Frontend UI&UX",
+    title: "Frontend",
     icon: web,
   },
   {
-    title: "Backend API&Server",
+    title: "Backend",
     icon: mobile,
   },
   {
-    title: "Database Data&Storage",
+    title: "Database",
     icon: backend,
   },
   {
-    title: "DevOps Infra&Operations",
+    title: "DevOps",
     icon: creator,
   },
 ];

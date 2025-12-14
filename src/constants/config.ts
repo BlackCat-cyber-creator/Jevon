@@ -14,7 +14,6 @@ type TConfig = {
     name: string;
     p: string[];
   };
-  contact: TSection;
   sections: {
     about: Required<TSection>;
     experience: TSection;
@@ -30,19 +29,15 @@ export const config: TConfig = {
     email: "jevonyoshield@mail.com", // Keeping practical email as is
   },
   hero: {
-    name: "Cap'n J",
-    p: ["I forge grand visual tales", "and webs o' wonder for yer crew."],
+    name: "Jevon",
+    p: ["Builder of system and application"],
   },
-  contact: {
-    p: "Send yer message, matey",
-    h2: "Hail Me!",
-  },
+  
   sections: {
     about: {
       p: "A Seadog's Tale",
       h2: "My Voyage.",
-      content: `A swift buccaneer mastering the enigmatic script. I partner with you to craft
-        robust solutions and bring our grand visions to life.`,
+      content: `List of skills and expertise`,
     },
     experience: {
       p: "",
@@ -55,8 +50,7 @@ export const config: TConfig = {
     works: {
       p: "My Booty",
       h2: "Grand Heists.",
-      content: `Skills unveiled through real-world projects with live demos.
-        A testament to solving knotty problems with diverse technologies.`,
+      content: `some real-world projects, complete with live demos (click the icon)`,
     },
   },
 };
