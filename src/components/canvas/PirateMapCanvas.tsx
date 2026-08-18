@@ -1,49 +1,13 @@
 import { Suspense, memo, useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Preload, useGLTF, Float, Html } from "@react-three/drei";
+import { OrbitControls, Preload, useGLTF, Float } from "@react-three/drei";
 import * as THREE from "three";
-import { MapPin } from "lucide-react";
 
 import CanvasLoader from "../layout/CanvasLoader";
 
 interface IPirateMapProps {
   isMobile: boolean;
 }
-
-const MapPinMarker = ({ position, label, sub }: { position: [number, number, number]; label: string; sub: string }) => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <group position={position}>
-      <mesh
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <sphereGeometry args={[0.16, 16, 16]} />
-        <meshStandardMaterial
-          color={hovered ? "#22d3ee" : "#f59e0b"}
-          emissive={hovered ? "#06b6d4" : "#d97706"}
-          emissiveIntensity={1.5}
-          roughness={0.3}
-        />
-      </mesh>
-
-      <Html position={[0, 0.35, 0]} center distanceFactor={8}>
-        <div
-          className={`pointer-events-none transition-all duration-200 ${
-            hovered ? "scale-105 opacity-100" : "scale-95 opacity-80"
-          }`}
-        >
-          <div className="flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-slate-950/90 px-2.5 py-1 text-[11px] font-medium text-amber-300 shadow-md backdrop-blur-md whitespace-nowrap">
-            <MapPin size={11} className="text-cyan-400" />
-            <span>{label}</span>
-            <span className="text-[10px] text-slate-400">({sub})</span>
-          </div>
-        </div>
-      </Html>
-    </group>
-  );
-};
 
 const PirateMap: React.FC<IPirateMapProps> = ({ isMobile }) => {
   const earth = useGLTF("./pirates_map.glb");
@@ -66,10 +30,6 @@ const PirateMap: React.FC<IPirateMapProps> = ({ isMobile }) => {
       <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.2}>
         <group ref={ref} position={[0, -0.1, 0]}>
           <primitive object={earth.scene} scale={isMobile ? 6.2 : 7.6} position-y={0} />
-
-          {/* Interactive Beacon Pins */}
-          <MapPinMarker position={[0.8, 0.6, 1.2]} label="Origin" sub="Indonesia" />
-          <MapPinMarker position={[-1.2, 0.8, -0.4]} label="Global" sub="Worldwide Remote" />
         </group>
       </Float>
     </group>
