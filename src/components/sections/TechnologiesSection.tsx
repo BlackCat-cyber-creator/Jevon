@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { View, Preload } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
 
-import { TechBallCanvas } from "../canvas";
+import { TechBallMesh } from "../canvas/TechBall";
 import { SectionWrapper } from "../../hoc";
 import { techClusters } from "../../constants/technologies";
 import { config } from "../../constants/config";
@@ -10,154 +11,125 @@ import { Header } from "../atoms/Header";
 import { TTechnology } from "../../types";
 
 const TechnologiesSection = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [hoveredTech, setHoveredTech] = useState<TTechnology | null>(null);
-  const [mobileSelectedTech, setMobileSelectedTech] = useState<TTechnology | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null!);
+  const [activeTech, setActiveTech] = useState<TTechnology | null>(null);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
-
-  const handleItemClick = (tech: TTechnology) => {
-    if (isMobile) {
-      setMobileSelectedTech(mobileSelectedTech?.name === tech.name ? null : tech);
-    }
+  const handleTechToggle = (tech: TTechnology) => {
+    setActiveTech(activeTech?.name === tech.name ? null : tech);
   };
 
   return (
-    <>
-      <Header useMotion={!isMobile} {...config.sections.tech} />
-
-      <p className="text-slate-300 mt-3 max-w-3xl text-base leading-relaxed font-light">
-        {config.sections.tech.content}
-      </p>
-
-      {/* Clumped Tech Clusters (Free-Floating 3D Gold Balls for Desktop & Mobile) */}
-      <div
-        onMouseMove={handleMouseMove}
-        className="mt-10 sm:mt-12 flex flex-col gap-8 sm:gap-10 relative"
-      >
-        {techClusters.map((cluster, cIndex) => (
-          <div key={cluster.clusterTitle} className="flex flex-col gap-3 sm:gap-4">
-            {/* Subtle Cluster Label */}
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-amber-400/90 bg-amber-500/10 px-3 py-0.5 sm:py-1 rounded-full border border-amber-400/20">
-                {cluster.clusterTitle}
-              </span>
-              <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-800 to-transparent" />
-            </div>
-
-            {/* Free-Floating 3D Gold Balls */}
-            <div className="flex flex-row flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-10 py-1 sm:py-2">
-              {cluster.items.map((technology, index) => (
-                <div
-                  className="flex flex-col items-center justify-center relative group cursor-pointer"
-                  key={technology.name}
-                  onClick={() => handleItemClick(technology)}
-                  onMouseEnter={() => !isMobile && setHoveredTech(technology)}
-                  onMouseLeave={() => !isMobile && setHoveredTech(null)}
-                >
-                  <div className="h-24 w-24 sm:h-32 sm:w-32 flex items-center justify-center">
-                    <TechBallCanvas icon={technology.icon} seed={cIndex * 4 + index} />
-                  </div>
-
-                  <span className="mt-1 sm:mt-2 text-[11px] sm:text-xs font-mono text-slate-400 group-hover:text-amber-300 text-center transition-colors">
-                    {technology.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {/* Mobile Tap Description Card */}
-        <AnimatePresence>
-          {isMobile && mobileSelectedTech && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="rounded-2xl border border-amber-400/40 bg-slate-950/95 p-4 shadow-xl backdrop-blur-xl mt-2 relative"
-            >
-              <button
-                type="button"
-                onClick={() => setMobileSelectedTech(null)}
-                className="absolute top-3 right-3 p-1 text-slate-400 hover:text-white"
-              >
-                <X size={16} />
-              </button>
-
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="h-7 w-7 rounded-lg bg-slate-900 border border-slate-800 p-1 flex items-center justify-center">
-                  <img src={mobileSelectedTech.icon} alt={mobileSelectedTech.name} className="h-full w-full object-contain" />
-                </div>
-                <span className="font-bold text-sm text-white">{mobileSelectedTech.name}</span>
-                {mobileSelectedTech.level && (
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-amber-400/30 bg-amber-500/10 text-amber-300">
-                    {mobileSelectedTech.level}
-                  </span>
-                )}
-              </div>
-
-              <p className="text-xs text-slate-300 leading-relaxed font-light">
-                {mobileSelectedTech.description}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Desktop Minimal Clean Floating Tooltip Card on Hover */}
-        <AnimatePresence>
-          {hoveredTech && !isMobile && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 6, scale: 0.95 }}
-              transition={{ duration: 0.15 }}
-              style={{
-                position: "fixed",
-                left: mousePos.x + 16,
-                top: mousePos.y + 16,
-                pointerEvents: "none",
-                zIndex: 9999,
-              }}
-              className="w-64 rounded-2xl border border-amber-400/40 bg-slate-950/95 p-3.5 shadow-2xl backdrop-blur-xl"
-            >
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
-                <div className="flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-lg bg-slate-900 border border-slate-800 p-1 flex items-center justify-center">
-                    <img src={hoveredTech.icon} alt={hoveredTech.name} className="h-full w-full object-contain" />
-                  </div>
-                  <span className="font-bold text-sm text-white">{hoveredTech.name}</span>
-                </div>
-                {hoveredTech.level && (
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-amber-400/30 bg-amber-500/10 text-amber-300">
-                    {hoveredTech.level}
-                  </span>
-                )}
-              </div>
-
-              <p className="text-xs text-slate-300 leading-relaxed font-light">
-                {hoveredTech.description}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <div ref={containerRef} className="relative">
+      {/* 1 Single Unified WebGL Canvas for all 3D Balls (Eliminates mobile WebGL context loss) */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Canvas
+          eventSource={containerRef}
+          dpr={[1, 1.2]}
+          gl={{
+            preserveDrawingBuffer: false,
+            powerPreference: "high-performance",
+            antialias: true,
+          }}
+        >
+          <View.Port />
+          <Preload all />
+        </Canvas>
       </div>
-    </>
+
+      <div className="relative z-10">
+        <Header useMotion={false} {...config.sections.tech} />
+
+        <p className="text-slate-300 mt-3 max-w-3xl text-base leading-relaxed font-light">
+          {config.sections.tech.content}
+        </p>
+
+        {/* Clumped Tech Clusters (Free-Floating 3D Gold Balls) */}
+        <div className="mt-10 sm:mt-12 flex flex-col gap-8 sm:gap-10">
+          {techClusters.map((cluster, cIndex) => (
+            <div key={cluster.clusterTitle} className="flex flex-col gap-3 sm:gap-4">
+              {/* Subtle Cluster Label */}
+              <div className="flex items-center gap-3">
+                <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-amber-400/90 bg-amber-500/10 px-3 py-0.5 sm:py-1 rounded-full border border-amber-400/20">
+                  {cluster.clusterTitle}
+                </span>
+                <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-800 to-transparent" />
+              </div>
+
+              {/* Free-Floating 3D Gold Balls */}
+              <div className="flex flex-row flex-wrap items-center justify-center sm:justify-start gap-6 sm:gap-10 py-1 sm:py-2">
+                {cluster.items.map((technology, index) => {
+                  const isActive = activeTech?.name === technology.name;
+                  const seed = cIndex * 4 + index;
+
+                  return (
+                    <div
+                      key={technology.name}
+                      className="flex flex-col items-center justify-center relative cursor-pointer group select-none"
+                      onClick={() => handleTechToggle(technology)}
+                      onMouseEnter={() => setActiveTech(technology)}
+                      onMouseLeave={() => setActiveTech(null)}
+                    >
+                      {/* Tooltip Card directly on top of the clicked/hovered ball */}
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                            transition={{ duration: 0.15 }}
+                            className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 w-60 sm:w-64 rounded-2xl border border-amber-400/40 bg-slate-950/95 p-3.5 shadow-2xl backdrop-blur-xl z-50 pointer-events-none"
+                          >
+                            <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+                              <div className="flex items-center gap-2">
+                                <div className="h-6 w-6 rounded-lg bg-slate-900 border border-slate-800 p-1 flex items-center justify-center">
+                                  <img
+                                    src={technology.icon}
+                                    alt={technology.name}
+                                    className="h-full w-full object-contain"
+                                  />
+                                </div>
+                                <span className="font-bold text-sm text-white">
+                                  {technology.name}
+                                </span>
+                              </div>
+                              {technology.level && (
+                                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-amber-400/30 bg-amber-500/10 text-amber-300">
+                                  {technology.level}
+                                </span>
+                              )}
+                            </div>
+
+                            <p className="text-xs text-slate-300 leading-relaxed font-light">
+                              {technology.description}
+                            </p>
+
+                            {/* Downward pointing golden arrow */}
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-amber-400/50" />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* 3D Ball Viewport (Rendered through the single Canvas context) */}
+                      <div className="h-24 w-24 sm:h-32 sm:w-32 flex items-center justify-center">
+                        <View className="h-full w-full">
+                          <Suspense fallback={null}>
+                            <TechBallMesh imgUrl={technology.icon} seed={seed} />
+                          </Suspense>
+                        </View>
+                      </div>
+
+                      <span className="mt-1 sm:mt-2 text-[11px] sm:text-xs font-mono text-slate-400 group-hover:text-amber-300 text-center transition-colors">
+                        {technology.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

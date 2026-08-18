@@ -1,16 +1,14 @@
-import React, { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Decal, Float, OrbitControls, Preload, useTexture } from "@react-three/drei";
+import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { Decal, Float, useTexture } from "@react-three/drei";
 import * as THREE from "three";
-
-import CanvasLoader from "../layout/CanvasLoader";
 
 interface ITechBallProps {
   imgUrl: string;
   seed?: number;
 }
 
-const TechBall: React.FC<ITechBallProps> = ({ imgUrl, seed = 0 }) => {
+export const TechBallMesh: React.FC<ITechBallProps> = ({ imgUrl, seed = 0 }) => {
   const [decal] = useTexture([imgUrl]);
   const meshRef = useRef<THREE.Mesh>(null!);
 
@@ -27,10 +25,10 @@ const TechBall: React.FC<ITechBallProps> = ({ imgUrl, seed = 0 }) => {
   return (
     <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
       {/* Warm Golden Lighting */}
-      <ambientLight intensity={0.9} color="#fde68a" />
-      <directionalLight position={[4, 6, 4]} intensity={1.6} color="#ffffff" />
+      <ambientLight intensity={1.1} color="#fde68a" />
+      <directionalLight position={[4, 6, 4]} intensity={1.8} color="#ffffff" />
       <directionalLight position={[-4, -3, 2]} intensity={0.9} color="#f59e0b" />
-      <pointLight position={[0, 0, 3]} intensity={0.8} color="#fbbf24" />
+      <pointLight position={[0, 0, 3]} intensity={0.9} color="#fbbf24" />
       
       {/* Rich Radiant Gold Icosahedron */}
       <mesh ref={meshRef} scale={2.75}>
@@ -53,29 +51,3 @@ const TechBall: React.FC<ITechBallProps> = ({ imgUrl, seed = 0 }) => {
     </Float>
   );
 };
-
-const TechBallCanvas: React.FC<{ icon: string; seed?: number }> = ({ icon, seed = 0 }) => {
-  return (
-    <Canvas
-      frameloop="always"
-      dpr={[1, 1.2]}
-      style={{ touchAction: "pan-y" }}
-      gl={{ preserveDrawingBuffer: false, antialias: true, powerPreference: "high-performance" }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enablePan={false}
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 1.8}
-          minPolarAngle={Math.PI / 2.2}
-          maxAzimuthAngle={Math.PI / 4}
-          minAzimuthAngle={-Math.PI / 4}
-        />
-        <TechBall imgUrl={icon} seed={seed} />
-      </Suspense>
-      <Preload all />
-    </Canvas>
-  );
-};
-
-export default TechBallCanvas;

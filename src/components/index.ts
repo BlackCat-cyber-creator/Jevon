@@ -1,6 +1,6 @@
 import {
   PirateMapCanvas,
-  TechBallCanvas,
+  TechBallMesh,
   ShipInBottleCanvas,
   StarsBackgroundCanvas,
 } from "./canvas";
@@ -21,7 +21,7 @@ export {
   Contact,
   CanvasLoader,
   PirateMapCanvas,
-  TechBallCanvas,
+  TechBallMesh,
   ShipInBottleCanvas,
   StarsBackgroundCanvas,
 };
