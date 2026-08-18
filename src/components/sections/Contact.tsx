@@ -26,17 +26,17 @@ const Contact = () => {
       {/* Consistent Section Header */}
       <Header useMotion={!isMobile} {...config.sections.contact} />
 
-      <p className="text-slate-300 mt-3 max-w-3xl text-base leading-relaxed font-light">
+      <p className="text-slate-300 mt-2.5 max-w-3xl text-base leading-relaxed font-light">
         {config.sections.contact.content}
       </p>
 
-      {/* 3D Pirate Map (Free-Floating) */}
-      <div className="h-[340px] sm:h-[420px] w-full relative flex items-center justify-center mt-6">
+      {/* 3D Pirate Map (Streamlined height to eliminate vertical gaps) */}
+      <div className="h-[180px] sm:h-[220px] w-full relative flex items-center justify-center mt-1 sm:mt-2">
         <PirateMapCanvas />
       </div>
 
       {/* Holographic User Profile Card */}
-      <div className="w-full flex justify-center mt-6">
+      <div className="w-full flex justify-center mt-2 sm:mt-4">
         <UserProfileCard
           name="Jevon"
           title="Captain"

@@ -63,9 +63,9 @@ const PirateMap: React.FC<IPirateMapProps> = ({ isMobile }) => {
       <directionalLight position={[-6, -2, -4]} intensity={1.2} color="#67e8f9" />
       <pointLight position={[0, 4, 6]} intensity={1.2} color="#fbbf24" />
 
-      <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.25}>
-        <group ref={ref} position={[0, -0.6, 0]}>
-          <primitive object={earth.scene} scale={isMobile ? 6.5 : 8.0} position-y={0} />
+      <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.2}>
+        <group ref={ref} position={[0, -0.1, 0]}>
+          <primitive object={earth.scene} scale={isMobile ? 6.2 : 7.6} position-y={0} />
 
           {/* Interactive Beacon Pins */}
           <MapPinMarker position={[0.8, 0.6, 1.2]} label="Origin" sub="Indonesia" />
@@ -100,10 +100,10 @@ const PirateMapCanvas: React.FC = () => {
         dpr={isMobile ? [1, 1] : [1, 1.5]}
         gl={{ preserveDrawingBuffer: false, antialias: true, powerPreference: "high-performance" }}
         camera={{
-          fov: isMobile ? 50 : 40,
+          fov: isMobile ? 40 : 32,
           near: 0.1,
           far: 200,
-          position: [-4, 2.5, 6],
+          position: [-3.5, 2.0, 5.0],
         }}
       >
         <Suspense fallback={<CanvasLoader />}>
@@ -114,7 +114,7 @@ const PirateMapCanvas: React.FC = () => {
               maxPolarAngle={Math.PI / 1.8}
               minPolarAngle={Math.PI / 2.5}
               rotateSpeed={0.8}
-              target={[0, -0.4, 0]}
+              target={[0, 0, 0]}
             />
           )}
           <MemoizedPirateMap isMobile={isMobile} />
