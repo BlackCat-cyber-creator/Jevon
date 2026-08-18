@@ -30,8 +30,8 @@ const Contact = () => {
         {config.sections.contact.content}
       </p>
 
-      {/* 3D Pirate Map (Proportionally centered with zero clipping) */}
-      <div className="h-[220px] sm:h-[260px] w-full max-w-2xl mx-auto relative z-20 flex items-center justify-center -my-2 sm:-my-3">
+      {/* 3D Pirate Map (Proportionate, vibrant, and unclipped) */}
+      <div className="h-[230px] sm:h-[270px] w-full max-w-2xl mx-auto relative z-20 flex items-center justify-center -my-1 sm:-my-2">
         <PirateMapCanvas />
       </div>
 
