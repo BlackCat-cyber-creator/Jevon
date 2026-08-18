@@ -30,13 +30,13 @@ const Contact = () => {
         {config.sections.contact.content}
       </p>
 
-      {/* 3D Pirate Map (Streamlined height to eliminate vertical gaps) */}
-      <div className="h-[180px] sm:h-[220px] w-full relative flex items-center justify-center mt-1 sm:mt-2">
+      {/* 3D Pirate Map (Layered on top of card & text with z-20, zero clipping) */}
+      <div className="h-[210px] sm:h-[250px] w-full relative z-20 flex items-center justify-center -my-2 sm:-my-4 overflow-visible">
         <PirateMapCanvas />
       </div>
 
       {/* Holographic User Profile Card */}
-      <div className="w-full flex justify-center mt-2 sm:mt-4">
+      <div className="w-full flex justify-center relative z-10 mt-1 sm:mt-2">
         <UserProfileCard
           name="Jevon"
           title="Captain"

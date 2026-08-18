@@ -22,14 +22,15 @@ const PirateMap: React.FC<IPirateMapProps> = ({ isMobile }) => {
   return (
     <group>
       {/* Studio Balanced Lighting */}
-      <ambientLight intensity={1.4} color="#ffffff" />
+      <ambientLight intensity={1.5} color="#ffffff" />
       <directionalLight position={[6, 10, 6]} intensity={2.2} color="#fffbeb" />
       <directionalLight position={[-6, -2, -4]} intensity={1.2} color="#67e8f9" />
       <pointLight position={[0, 4, 6]} intensity={1.2} color="#fbbf24" />
 
       <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.2}>
-        <group ref={ref} position={[0, -0.1, 0]}>
-          <primitive object={earth.scene} scale={isMobile ? 6.2 : 7.6} position-y={0} />
+        <group ref={ref} position={[0, 0, 0]}>
+          {/* Calibrated scale with comfortable margins to avoid any clipping */}
+          <primitive object={earth.scene} scale={isMobile ? 5.2 : 6.6} position-y={0} />
         </group>
       </Float>
     </group>
@@ -54,13 +55,13 @@ const PirateMapCanvas: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full overflow-visible">
       <Canvas
         frameloop="always"
         dpr={isMobile ? [1, 1] : [1, 1.5]}
         gl={{ preserveDrawingBuffer: false, antialias: true, powerPreference: "high-performance" }}
         camera={{
-          fov: isMobile ? 40 : 32,
+          fov: isMobile ? 36 : 28,
           near: 0.1,
           far: 200,
           position: [-3.5, 2.0, 5.0],
