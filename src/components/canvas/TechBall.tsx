@@ -59,6 +59,7 @@ const TechBallCanvas: React.FC<{ icon: string; seed?: number }> = ({ icon, seed 
     <Canvas
       frameloop="always"
       dpr={[1, 1.2]}
+      style={{ touchAction: "pan-y" }}
       gl={{ preserveDrawingBuffer: false, antialias: true, powerPreference: "high-performance" }}
     >
       <Suspense fallback={<CanvasLoader />}>

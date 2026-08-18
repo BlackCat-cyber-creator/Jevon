@@ -11,7 +11,6 @@
 html,
 body {
   overflow-x: hidden;
-  overscroll-behavior-y: none;
   background-color: #030712;
   color: #f8fafc;
   font-family: "Outfit", "Poppins", sans-serif;

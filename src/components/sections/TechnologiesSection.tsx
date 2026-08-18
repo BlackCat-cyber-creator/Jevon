@@ -45,7 +45,7 @@ const TechnologiesSection = () => {
         {config.sections.tech.content}
       </p>
 
-      {/* Clumped Tech Clusters (Free-Floating 3D Balls Grouped by Nature) */}
+      {/* Clumped Tech Clusters (Free-Floating 3D Gold Balls for Desktop & Mobile) */}
       <div
         onMouseMove={handleMouseMove}
         className="mt-10 sm:mt-12 flex flex-col gap-8 sm:gap-10 relative"
@@ -60,31 +60,21 @@ const TechnologiesSection = () => {
               <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-800 to-transparent" />
             </div>
 
-            {/* Free-Floating 3D Balls / Mobile Touch Icons */}
-            <div className="flex flex-row flex-wrap items-center gap-6 sm:gap-10 py-1 sm:py-2">
+            {/* Free-Floating 3D Gold Balls */}
+            <div className="flex flex-row flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-10 py-1 sm:py-2">
               {cluster.items.map((technology, index) => (
                 <div
-                  className="flex flex-col items-center justify-center relative group cursor-pointer active:scale-95 transition-transform"
+                  className="flex flex-col items-center justify-center relative group cursor-pointer"
                   key={technology.name}
                   onClick={() => handleItemClick(technology)}
                   onMouseEnter={() => !isMobile && setHoveredTech(technology)}
                   onMouseLeave={() => !isMobile && setHoveredTech(null)}
                 >
-                  <div className="h-20 w-20 sm:h-32 sm:w-32 flex items-center justify-center">
-                    {isMobile ? (
-                      <div className="h-16 w-16 p-2.5 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center shadow-md hover:border-amber-400 transition-colors">
-                        <img
-                          src={technology.icon}
-                          alt={technology.name}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                    ) : (
-                      <TechBallCanvas icon={technology.icon} seed={cIndex * 4 + index} />
-                    )}
+                  <div className="h-24 w-24 sm:h-32 sm:w-32 flex items-center justify-center">
+                    <TechBallCanvas icon={technology.icon} seed={cIndex * 4 + index} />
                   </div>
 
-                  <span className="mt-1.5 sm:mt-2 text-[11px] sm:text-xs font-mono text-slate-400 group-hover:text-amber-300 text-center transition-colors">
+                  <span className="mt-1 sm:mt-2 text-[11px] sm:text-xs font-mono text-slate-400 group-hover:text-amber-300 text-center transition-colors">
                     {technology.name}
                   </span>
                 </div>

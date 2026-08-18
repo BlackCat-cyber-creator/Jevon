@@ -39,7 +39,7 @@ const Contact = () => {
       <div className="w-full flex justify-center mt-6">
         <UserProfileCard
           name="Jevon"
-          title="Captain & Full-Stack Developer"
+          title="Captain"
           handle="jevon.n.shield"
           status="Online"
           contactText="Contact"

@@ -75,10 +75,12 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Full-Screen 3D Ship in Bottle Canvas (Floating freely across the viewport) */}
-      <Suspense fallback={null}>
-        <ShipInBottleCanvas />
-      </Suspense>
+      {/* Full-Screen 3D Ship in Bottle Canvas */}
+      <div className="absolute inset-0 pointer-events-none md:pointer-events-auto">
+        <Suspense fallback={null}>
+          <ShipInBottleCanvas />
+        </Suspense>
+      </div>
 
       {/* Bottom Scroll Prompt */}
       <div className="absolute bottom-8 w-full flex justify-center items-center z-20 pointer-events-none">
