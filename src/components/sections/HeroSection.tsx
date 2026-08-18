@@ -72,23 +72,6 @@ const HeroSection = () => {
           <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed mt-4 font-light max-w-xl">
             {config.hero.tagline}
           </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-4 mt-6">
-            <a
-              href="#work"
-              className="inline-flex items-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-400 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-950 shadow-md transition-all duration-200"
-            >
-              <span>Explore Projects</span>
-            </a>
-
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 hover:border-slate-500 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-200 backdrop-blur-md transition-all duration-200"
-            >
-              <span>Hail the Captain</span>
-            </a>
-          </div>
         </div>
       </div>
 
