@@ -22,15 +22,15 @@ const PirateMap: React.FC<IPirateMapProps> = ({ isMobile }) => {
   return (
     <group>
       {/* Studio Balanced Lighting */}
-      <ambientLight intensity={1.5} color="#ffffff" />
+      <ambientLight intensity={1.6} color="#ffffff" />
       <directionalLight position={[6, 10, 6]} intensity={2.2} color="#fffbeb" />
       <directionalLight position={[-6, -2, -4]} intensity={1.2} color="#67e8f9" />
       <pointLight position={[0, 4, 6]} intensity={1.2} color="#fbbf24" />
 
-      <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.2}>
+      <Float speed={1.5} rotationIntensity={0.12} floatIntensity={0.15}>
         <group ref={ref} position={[0, 0, 0]}>
-          {/* Calibrated scale with comfortable margins to avoid any clipping */}
-          <primitive object={earth.scene} scale={isMobile ? 5.2 : 6.6} position-y={0} />
+          {/* Scaled proportionally so the 3D scroll map is 100% unclipped in all orientations */}
+          <primitive object={earth.scene} scale={isMobile ? 3.6 : 4.6} position-y={0} />
         </group>
       </Float>
     </group>
@@ -55,16 +55,16 @@ const PirateMapCanvas: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-full w-full overflow-visible">
+    <div className="relative h-full w-full">
       <Canvas
         frameloop="always"
         dpr={isMobile ? [1, 1] : [1, 1.5]}
         gl={{ preserveDrawingBuffer: false, antialias: true, powerPreference: "high-performance" }}
         camera={{
-          fov: isMobile ? 36 : 28,
+          fov: isMobile ? 42 : 32,
           near: 0.1,
           far: 200,
-          position: [-3.5, 2.0, 5.0],
+          position: [0, 2.2, 7.5],
         }}
       >
         <Suspense fallback={<CanvasLoader />}>

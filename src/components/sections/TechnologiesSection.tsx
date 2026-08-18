@@ -43,20 +43,21 @@ const TechnologiesSection = () => {
           {config.sections.tech.content}
         </p>
 
-        {/* Clumped Tech Clusters (Free-Floating 3D Gold Balls) */}
-        <div className="mt-8 sm:mt-10 flex flex-col gap-7 sm:gap-9">
+        {/* Clumped Tech Clusters (Always Centered in Middle on Desktop & Mobile) */}
+        <div className="mt-8 sm:mt-10 flex flex-col gap-8 sm:gap-10">
           {techClusters.map((cluster, cIndex) => (
-            <div key={cluster.clusterTitle} className="flex flex-col gap-2.5 sm:gap-3.5">
-              {/* Subtle Cluster Label */}
-              <div className="flex items-center gap-3">
-                <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-amber-400/90 bg-amber-500/10 px-3 py-0.5 sm:py-1 rounded-full border border-amber-400/20">
+            <div key={cluster.clusterTitle} className="flex flex-col gap-3 sm:gap-4">
+              {/* Symmetrical Centered Cluster Label */}
+              <div className="flex items-center justify-center gap-3">
+                <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-slate-800" />
+                <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-amber-400/90 bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-400/20 shadow-sm">
                   {cluster.clusterTitle}
                 </span>
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-800 to-transparent" />
               </div>
 
-              {/* Free-Floating 3D Gold Balls */}
-              <div className="flex flex-row flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-8 py-1 sm:py-2">
+              {/* Free-Floating 3D Gold Balls (Centered on Desktop & Mobile) */}
+              <div className="flex flex-row flex-wrap items-center justify-center gap-6 sm:gap-10 py-1 sm:py-2">
                 {cluster.items.map((technology, index) => {
                   const isActive = activeTech?.name === technology.name;
                   const seed = cIndex * 4 + index;
@@ -78,7 +79,7 @@ const TechnologiesSection = () => {
                             exit={{ opacity: 0, y: 6, x: "-50%", scale: 0.95 }}
                             transition={{ duration: 0.15 }}
                             style={{ left: "50%" }}
-                            className="absolute bottom-full mb-2 w-56 sm:w-64 rounded-2xl border border-amber-400/40 bg-slate-950/95 p-3 shadow-2xl backdrop-blur-xl z-50 pointer-events-none"
+                            className="absolute bottom-full mb-2.5 w-56 sm:w-64 rounded-2xl border border-amber-400/40 bg-slate-950/95 p-3 shadow-2xl backdrop-blur-xl z-50 pointer-events-none"
                           >
                             <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-800">
                               <div className="flex items-center gap-2">
