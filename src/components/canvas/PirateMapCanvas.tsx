@@ -1,95 +1,127 @@
 import { Suspense, memo, useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-import * as THREE from 'three';
+import { OrbitControls, Preload, useGLTF, Float, Html } from "@react-three/drei";
+import * as THREE from "three";
+import { MapPin } from "lucide-react";
 
 import CanvasLoader from "../layout/CanvasLoader";
 
-const PirateMap: React.FC<{ isMobile: boolean }> = ({ isMobile }) => {
+interface IPirateMapProps {
+  isMobile: boolean;
+}
+
+const MapPinMarker = ({ position, label, sub }: { position: [number, number, number]; label: string; sub: string }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <group position={position}>
+      <mesh
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+      >
+        <sphereGeometry args={[0.16, 16, 16]} />
+        <meshStandardMaterial
+          color={hovered ? "#22d3ee" : "#f59e0b"}
+          emissive={hovered ? "#06b6d4" : "#d97706"}
+          emissiveIntensity={1.5}
+          roughness={0.3}
+        />
+      </mesh>
+
+      <Html position={[0, 0.35, 0]} center distanceFactor={8}>
+        <div
+          className={`pointer-events-none transition-all duration-200 ${
+            hovered ? "scale-105 opacity-100" : "scale-95 opacity-80"
+          }`}
+        >
+          <div className="flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-slate-950/90 px-2.5 py-1 text-[11px] font-medium text-amber-300 shadow-md backdrop-blur-md whitespace-nowrap">
+            <MapPin size={11} className="text-cyan-400" />
+            <span>{label}</span>
+            <span className="text-[10px] text-slate-400">({sub})</span>
+          </div>
+        </div>
+      </Html>
+    </group>
+  );
+};
+
+const PirateMap: React.FC<IPirateMapProps> = ({ isMobile }) => {
   const earth = useGLTF("./pirates_map.glb");
   const ref = useRef<THREE.Group>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (ref.current) {
-      ref.current.rotation.y += delta * 0.5;
-      ref.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1 - 1;
+      ref.current.rotation.y += delta * 0.35;
     }
   });
 
   return (
     <group>
-      <hemisphereLight intensity={0.5} groundColor="black" />
-      <spotLight
-        position={[0, 8, 3]} /* Adjusted position */
-        angle={0.5}
-        penumbra={1}
-        intensity={isMobile ? 100 : 300}
-        castShadow
-        shadow-mapSize={isMobile ? 1024 : 4096}
-      />
-      <pointLight intensity={isMobile ? 100 : 300} position={[0, 8, -3]} />
-      <group ref={ref}>
-        <primitive object={earth.scene} scale={8} position-y={0} rotation-y={0} />
-      </group>
+      {/* Studio Balanced Lighting */}
+      <ambientLight intensity={1.4} color="#ffffff" />
+      <directionalLight position={[6, 10, 6]} intensity={2.2} color="#fffbeb" />
+      <directionalLight position={[-6, -2, -4]} intensity={1.2} color="#67e8f9" />
+      <pointLight position={[0, 4, 6]} intensity={1.2} color="#fbbf24" />
+
+      <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.25}>
+        <group ref={ref} position={[0, -0.6, 0]}>
+          <primitive object={earth.scene} scale={isMobile ? 6.5 : 8.0} position-y={0} />
+
+          {/* Interactive Beacon Pins */}
+          <MapPinMarker position={[0.8, 0.6, 1.2]} label="Origin" sub="Indonesia" />
+          <MapPinMarker position={[-1.2, 0.8, -0.4]} label="Global" sub="Worldwide Remote" />
+        </group>
+      </Float>
     </group>
   );
 };
 
 const MemoizedPirateMap = memo(PirateMap);
 
-const PirateMapCanvas = () => {
+const PirateMapCanvas: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Add a listener for changes to the screen size
     const mediaQuery = window.matchMedia("(max-width: 768px)");
-
-    // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
 
-    // Define a callback function to handle changes to the media query
     const handleMediaQueryChange = (event: MediaQueryListEvent) => {
       setIsMobile(event.matches);
     };
 
-    // Add the callback function as a listener for changes to the media query
     mediaQuery.addEventListener("change", handleMediaQueryChange);
-
-    // Remove the listener when the component is unmounted
-    return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
+    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
   }, []);
 
   return (
-    <Canvas
-      shadows
-      frameloop="always"
-      dpr={isMobile ? [1, 1] : [1, 1.5]}
-      gl={{ preserveDrawingBuffer: true }}
-      camera={{
-        fov: isMobile ? 55 : 45,
-        near: 0.1,
-        far: 200,
-        position: [-4, 3, 6],
-      }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        {!isMobile && (
-          <OrbitControls
-            // autoRotate
-            enablePan={false}
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-            target={[0, 0, 0]}
-          />
-        )}
-        <MemoizedPirateMap isMobile={isMobile} />
-
-        <Preload all />
-      </Suspense>
-    </Canvas>
+    <div className="relative h-full w-full">
+      <Canvas
+        frameloop="always"
+        dpr={isMobile ? [1, 1] : [1, 1.5]}
+        gl={{ preserveDrawingBuffer: false, antialias: true, powerPreference: "high-performance" }}
+        camera={{
+          fov: isMobile ? 50 : 40,
+          near: 0.1,
+          far: 200,
+          position: [-4, 2.5, 6],
+        }}
+      >
+        <Suspense fallback={<CanvasLoader />}>
+          {!isMobile && (
+            <OrbitControls
+              enablePan={false}
+              enableZoom={false}
+              maxPolarAngle={Math.PI / 1.8}
+              minPolarAngle={Math.PI / 2.5}
+              rotateSpeed={0.8}
+              target={[0, -0.4, 0]}
+            />
+          )}
+          <MemoizedPirateMap isMobile={isMobile} />
+          <Preload all />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 };
 

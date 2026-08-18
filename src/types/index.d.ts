@@ -10,6 +10,9 @@ export type TExperience = {
   date: string;
   points: string[];
   icon?: string;
+  role?: string;
+  location?: string;
+  tags?: string[];
 } & Required<Pick<TCommonProps, "title">>;
 
 export type TTestimonial = {
@@ -27,17 +30,32 @@ export type TProject = {
   }[];
   image: string;
   websiteLink?: string;
-  favicon: string;
+  githubLink?: string;
+  favicon?: string;
+  category?: "fullstack" | "ai" | "web" | "mobile";
+  highlights?: string[];
+  featured?: boolean;
 } & Required<Pick<TCommonProps, "name">>;
 
-export type TTechnology = Required<Omit<TCommonProps, "title">>;
+export type TTechnology = {
+  name: string;
+  icon: string;
+  category?: "frontend" | "backend" | "database" | "devops" | "creative";
+  level?: string;
+  description?: string;
+};
 
 export type TNavLink = {
   id: string;
 } & Required<Pick<TCommonProps, "title">>;
 
-export type TService = Required<Omit<TCommonProps, "name">> & {
+export type TService = {
+  title: string;
+  icon: string;
   subtitle?: string;
+  description?: string;
+  skills?: string[];
+  accentColor?: string;
 };
 
 export type TMotion = {

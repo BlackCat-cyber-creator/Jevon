@@ -1,9 +1,8 @@
-// @ts-nocheck
 import {
   PirateMapCanvas,
   TechBallCanvas,
   ShipInBottleCanvas,
-  // StarsBackgroundCanvas,
+  StarsBackgroundCanvas,
 } from "./canvas";
 import HeroSection from "./sections/HeroSection";
 import Navbar from "./layout/Navbar";
@@ -24,5 +23,5 @@ export {
   PirateMapCanvas,
   TechBallCanvas,
   ShipInBottleCanvas,
-  // StarsBackgroundCanvas,
+  StarsBackgroundCanvas,
 };

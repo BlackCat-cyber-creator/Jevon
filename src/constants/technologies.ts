@@ -1,74 +1,112 @@
-import type {
-  TTechnology,
-} from "../types";
+import type { TTechnology } from "../types";
 
-import css from "../assets/tech/css.png";
 import docker from "../assets/tech/docker.png";
 import figma from "../assets/tech/figma.png";
 import git from "../assets/tech/git.png";
-import html from "../assets/tech/html.png";
-import javascript from "../assets/tech/javascript.png";
 import mongodb from "../assets/tech/mongodb.png";
 import nodejs from "../assets/tech/nodejs.png";
 import reactjs from "../assets/tech/reactjs.png";
 import redux from "../assets/tech/redux.png";
 import tailwind from "../assets/tech/tailwind.png";
 import typescript from "../assets/tech/typescript.png";
-import threejs from "../assets/tech/threejs.svg";
+import threejs from "../assets/tech/threejs.png";
 
-const technologies: TTechnology[] = [
+export interface ITechCluster {
+  clusterTitle: string;
+  items: TTechnology[];
+}
+
+export const techClusters: ITechCluster[] = [
   {
-    name: "HTML 5",
-    icon: html,
+    clusterTitle: "3D & Creative Engineering",
+    items: [
+      {
+        name: "Three JS / R3F",
+        icon: threejs,
+        category: "creative",
+        level: "Advanced",
+        description: "3D spatial scenes, WebGL shaders, glTF model kinematics, and lighting systems.",
+      },
+      {
+        name: "Figma",
+        icon: figma,
+        category: "creative",
+        level: "Advanced",
+        description: "High-fidelity spatial UI/UX, interactive design systems, and design tokens.",
+      },
+    ],
   },
   {
-    name: "CSS 3",
-    icon: css,
+    clusterTitle: "Frontend Architecture",
+    items: [
+      {
+        name: "TypeScript",
+        icon: typescript,
+        category: "frontend",
+        level: "Expert",
+        description: "Strict typing, complex generics, and scalable enterprise architecture.",
+      },
+      {
+        name: "React JS",
+        icon: reactjs,
+        category: "frontend",
+        level: "Expert",
+        description: "Concurrent rendering, custom hooks, and high-performance reactive UI patterns.",
+      },
+      {
+        name: "Tailwind CSS",
+        icon: tailwind,
+        category: "frontend",
+        level: "Expert",
+        description: "Modular design systems, fluid responsive layouts, and modern dark-mode styling.",
+      },
+      {
+        name: "Redux Toolkit",
+        icon: redux,
+        category: "frontend",
+        level: "Advanced",
+        description: "Predictable centralized state management, RTK Query, and cache synchronization.",
+      },
+    ],
   },
   {
-    name: "JavaScript",
-    icon: javascript,
+    clusterTitle: "Backend & Systems",
+    items: [
+      {
+        name: "Node JS",
+        icon: nodejs,
+        category: "backend",
+        level: "Advanced",
+        description: "Event-driven asynchronous services, RESTful APIs, and scalable server architecture.",
+      },
+      {
+        name: "MongoDB",
+        icon: mongodb,
+        category: "database",
+        level: "Advanced",
+        description: "Flexible document schemas, aggregation pipelines, and high-availability databases.",
+      },
+    ],
   },
   {
-    name: "TypeScript",
-    icon: typescript,
-  },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "figma",
-    icon: figma,
-  },
-  {
-    name: "docker",
-    icon: docker,
+    clusterTitle: "DevOps & Cloud",
+    items: [
+      {
+        name: "Docker",
+        icon: docker,
+        category: "devops",
+        level: "Intermediate",
+        description: "Containerized environments, reproducible builds, and multi-service orchestration.",
+      },
+      {
+        name: "Git & GitHub",
+        icon: git,
+        category: "devops",
+        level: "Expert",
+        description: "Git flow branching, CI/CD automated pipelines, and collaborative version control.",
+      },
+    ],
   },
 ];
 
-export { technologies }; 
+export const technologies: TTechnology[] = techClusters.flatMap((c) => c.items);

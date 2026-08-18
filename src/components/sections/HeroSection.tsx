@@ -1,44 +1,112 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
+import { ArrowDown, ChevronRight } from "lucide-react";
 
-import { styles } from "../../constants/styles";
 import { config } from "../../constants/config";
+import { styles } from "../../constants/styles";
 
 const ShipInBottleCanvas = lazy(() => import("../canvas/ShipInBottleCanvas"));
 
 const HeroSection = () => {
-  return (
-    <section className="relative w-full h-screen mx-auto">
-      <video
-        className="absolute inset-0 z-0 w-full h-full object-cover"
-        src="/herobg.webm"
-        autoPlay
-        loop
-        muted
-        playsInline
-      ></video>
-      {/* Content container */}
-      <div
-        className={`absolute inset-0 top-[100px] mx-auto max-w-7xl ${styles.paddingX} flex flex-row items-start gap-5`}
-      >
-        <div className="mt-5 flex flex-col items-center justify-center">
-          <div className="h-5 w-5 rounded-full bg-[#B8860B]" />
-          <div className="violet-gradient h-40 w-1 sm:h-80" />
-        </div>
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
-        <div>
-          <h1 className={`${styles.heroHeadText} text-white font-pirata`}>
-            Hi, I'm <span className="text-[#B8860B]">{config.hero.name}</span>
+  // Typewriter rotation effect
+  useEffect(() => {
+    const titles = config.hero.titles;
+    const currentTitle = titles[currentTitleIndex];
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && displayedText.length < currentTitle.length) {
+      timeout = setTimeout(() => {
+        setDisplayedText(currentTitle.slice(0, displayedText.length + 1));
+      }, 70);
+    } else if (!isDeleting && displayedText.length === currentTitle.length) {
+      timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2200);
+    } else if (isDeleting && displayedText.length > 0) {
+      timeout = setTimeout(() => {
+        setDisplayedText(currentTitle.slice(0, displayedText.length - 1));
+      }, 35);
+    } else if (isDeleting && displayedText.length === 0) {
+      setIsDeleting(false);
+      setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, currentTitleIndex]);
+
+  return (
+    <section className="relative w-full h-screen mx-auto overflow-hidden bg-slate-950">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <video
+          className="w-full h-full object-cover opacity-25"
+          src="/herobg.webm"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/80" />
+      </div>
+
+      {/* Content Container (Left side) */}
+      <div
+        className={`absolute inset-0 top-[120px] sm:top-[140px] mx-auto max-w-7xl ${styles.paddingX} flex flex-col items-start gap-5 z-20 pointer-events-none`}
+      >
+        <div className="pointer-events-auto max-w-2xl">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white">
+            Hi, I'm <span className="font-pirata text-5xl sm:text-7xl lg:text-8xl gold-gradient-text tracking-wide">{config.hero.name}</span>
           </h1>
-          <p className={`${styles.heroSubText} text-white-100 mt-2`}>
-            {config.hero.p[0]} <br className="hidden sm:block" />
-            {config.hero.p[1]}
+          
+          {/* Typewriter Subtitle */}
+          <div className="flex items-center gap-2 text-xl sm:text-2xl lg:text-3xl font-semibold text-cyan-300 min-h-[40px] mt-2">
+            <ChevronRight size={22} className="text-amber-400 flex-shrink-0" />
+            <span className="font-mono">{displayedText}</span>
+            <span className="inline-block w-2.5 h-6 bg-cyan-400 animate-pulse" />
+          </div>
+
+          {/* Narrative Tagline */}
+          <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed mt-4 font-light max-w-xl">
+            {config.hero.tagline}
           </p>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-4 mt-6">
+            <a
+              href="#work"
+              className="inline-flex items-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-400 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-950 shadow-md transition-all duration-200"
+            >
+              <span>Explore Projects</span>
+            </a>
+
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 hover:border-slate-500 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-200 backdrop-blur-md transition-all duration-200"
+            >
+              <span>Hail the Captain</span>
+            </a>
+          </div>
         </div>
       </div>
 
+      {/* Full-Screen 3D Ship in Bottle Canvas (Floating freely across the viewport) */}
       <Suspense fallback={null}>
         <ShipInBottleCanvas />
       </Suspense>
+
+      {/* Bottom Scroll Prompt */}
+      <div className="absolute bottom-8 w-full flex justify-center items-center z-20 pointer-events-none">
+        <a
+          href="#about"
+          className="pointer-events-auto flex flex-col items-center gap-1.5 text-xs text-slate-400 hover:text-amber-300 transition-colors group"
+        >
+          <span className="tracking-wider uppercase text-[10px]">Explore Voyage</span>
+          <ArrowDown size={14} className="text-amber-400 animate-bounce" />
+        </a>
+      </div>
     </section>
   );
 };
