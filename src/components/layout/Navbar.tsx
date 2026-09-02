@@ -46,9 +46,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.paddingX} fixed top-0 z-40 flex w-full items-center py-4 sm:py-5 transition-all duration-300 ${
+      className={`${styles.paddingX} fixed top-0 z-50 flex w-full items-center py-4 sm:py-5 transition-all duration-300 ${
         scrolled
-          ? "bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/70 shadow-lg shadow-black/40"
+          ? "bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/80 shadow-lg shadow-black/50"
           : "bg-transparent"
       }`}
     >
@@ -128,13 +128,13 @@ const Navbar = () => {
 
           {toggle && (
             <>
-              {/* Backdrop */}
+              {/* Dim Backdrop Overlay */}
               <div
-                className="fixed inset-0 z-40"
+                className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
                 onClick={() => setToggle(false)}
               />
-              {/* Drawer */}
-              <div className="fixed inset-x-4 top-16 z-50 rounded-2xl border border-slate-800 bg-slate-950/98 p-5 backdrop-blur-2xl shadow-2xl flex flex-col gap-3">
+              {/* Solid High-Contrast Mobile Drawer */}
+              <div className="fixed inset-x-4 top-16 sm:top-20 z-50 rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl p-5 flex flex-col gap-3">
                 <ul className="flex flex-col gap-1">
                   {navLinks.map((nav) => (
                     <li
@@ -142,8 +142,8 @@ const Navbar = () => {
                       onClick={() => setToggle(false)}
                       className={`rounded-xl px-4 py-3 text-sm font-medium transition-all cursor-pointer ${
                         active === nav.id
-                          ? "bg-amber-500/15 text-amber-300 font-semibold border border-amber-400/20"
-                          : "text-slate-300 hover:bg-slate-900 hover:text-white"
+                          ? "bg-amber-500/15 text-amber-300 font-semibold border border-amber-400/25"
+                          : "text-slate-200 hover:bg-slate-800 hover:text-white"
                       }`}
                     >
                       <a href={`#${nav.id}`} className="block">
@@ -153,7 +153,7 @@ const Navbar = () => {
                   ))}
                 </ul>
 
-                <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
                   <a
                     href={config.html.github}
                     target="_blank"
