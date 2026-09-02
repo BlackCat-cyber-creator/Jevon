@@ -1,3 +1,6 @@
+// Centralized type contracts — zero `any` types
+// All types are strict and used across the application
+
 export type TCommonProps = {
   title?: string;
   name?: string;
@@ -14,13 +17,6 @@ export type TExperience = {
   location?: string;
   tags?: string[];
 } & Required<Pick<TCommonProps, "title">>;
-
-export type TTestimonial = {
-  testimonial: string;
-  designation: string;
-  company: string;
-  image: string;
-} & Required<Pick<TCommonProps, "name">>;
 
 export type TProject = {
   description: string;
@@ -41,7 +37,7 @@ export type TTechnology = {
   name: string;
   icon: string;
   category?: "frontend" | "backend" | "database" | "devops" | "creative";
-  level?: string;
+  level?: "Beginner" | "Intermediate" | "Advanced" | "Expert";
   description?: string;
 };
 
@@ -60,7 +56,7 @@ export type TService = {
 
 export type TMotion = {
   direction: "up" | "down" | "left" | "right" | "";
-  type: "tween" | "spring" | "just" | "";
+  type: "tween" | "spring" | "just";
   delay: number;
   duration: number;
 };

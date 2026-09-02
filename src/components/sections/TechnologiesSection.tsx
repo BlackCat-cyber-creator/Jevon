@@ -1,17 +1,14 @@
-import { useState, useRef, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { View, Preload } from "@react-three/drei";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { TechBallMesh } from "../canvas/TechBall";
-import { SectionWrapper } from "../../hoc";
+import { TechBallCanvas } from "../canvas/TechBall";
 import { techClusters } from "../../constants/technologies";
 import { config } from "../../constants/config";
 import { Header } from "../atoms/Header";
-import { TTechnology } from "../../types";
+import { styles } from "../../constants/styles";
+import type { TTechnology } from "../../types";
 
 const TechnologiesSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null!);
   const [activeTech, setActiveTech] = useState<TTechnology | null>(null);
 
   const handleTechToggle = (tech: TTechnology) => {
@@ -19,31 +16,20 @@ const TechnologiesSection = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative">
-      {/* 1 Single Unified WebGL Canvas for all 3D Balls (Eliminates mobile WebGL context loss) */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <Canvas
-          eventSource={containerRef}
-          dpr={[1, 1.2]}
-          gl={{
-            preserveDrawingBuffer: false,
-            powerPreference: "high-performance",
-            antialias: true,
-          }}
-        >
-          <View.Port />
-          <Preload all />
-        </Canvas>
-      </div>
+    <section
+      id="tech"
+      className={`${styles.padding} relative z-0 mx-auto max-w-7xl`}
+    >
+      <span className="hash-span">&nbsp;</span>
 
       <div className="relative z-10">
         <Header useMotion={false} {...config.sections.tech} />
 
-        <p className="text-slate-300 mt-3 max-w-3xl text-base leading-relaxed font-light">
+        <p className="text-slate-300/80 mt-2 max-w-2xl text-sm leading-relaxed font-light">
           {config.sections.tech.content}
         </p>
 
-        {/* Clumped Tech Clusters (Always Centered in Middle on Desktop & Mobile) */}
+        {/* Clumped Tech Clusters */}
         <div className="mt-8 sm:mt-10 flex flex-col gap-8 sm:gap-10">
           {techClusters.map((cluster, cIndex) => (
             <div key={cluster.clusterTitle} className="flex flex-col gap-3 sm:gap-4">
@@ -53,10 +39,10 @@ const TechnologiesSection = () => {
                 <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-amber-400/90 bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-400/20 shadow-sm">
                   {cluster.clusterTitle}
                 </span>
-                <div className="h-[1px] flex-1 bg-gradient-to-r from-slate-800 to-transparent" />
+                <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-slate-800" />
               </div>
 
-              {/* Free-Floating 3D Gold Balls (Centered on Desktop & Mobile) */}
+              {/* Free-Floating 3D Gold Balls */}
               <div className="flex flex-row flex-wrap items-center justify-center gap-6 sm:gap-10 py-1 sm:py-2">
                 {cluster.items.map((technology, index) => {
                   const isActive = activeTech?.name === technology.name;
@@ -65,12 +51,9 @@ const TechnologiesSection = () => {
                   return (
                     <div
                       key={technology.name}
-                      className="flex flex-col items-center justify-center relative cursor-pointer group select-none"
-                      onClick={() => handleTechToggle(technology)}
-                      onMouseEnter={() => setActiveTech(technology)}
-                      onMouseLeave={() => setActiveTech(null)}
+                      className="flex flex-col items-center justify-center relative select-none"
                     >
-                      {/* Tooltip Card precisely centered directly above the tapped/hovered ball */}
+                      {/* Tooltip Card directly above tapped/hovered ball */}
                       <AnimatePresence>
                         {isActive && (
                           <motion.div
@@ -105,19 +88,20 @@ const TechnologiesSection = () => {
                               {technology.description}
                             </p>
 
-                            {/* Downward pointing golden arrow centered precisely to the ball */}
+                            {/* Downward pointing golden arrow */}
                             <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-amber-400/50" />
                           </motion.div>
                         )}
                       </AnimatePresence>
 
-                      {/* 3D Ball Viewport (Rendered through the single Canvas context) */}
-                      <div className="h-20 w-20 sm:h-28 sm:w-28 flex items-center justify-center">
-                        <View className="h-full w-full">
-                          <Suspense fallback={null}>
-                            <TechBallMesh imgUrl={technology.icon} seed={seed} />
-                          </Suspense>
-                        </View>
+                      {/* 3D Ball Container with direct Canvas */}
+                      <div
+                        className="h-20 w-20 sm:h-28 sm:w-28 cursor-grab active:cursor-grabbing"
+                        onClick={() => handleTechToggle(technology)}
+                        onMouseEnter={() => setActiveTech(technology)}
+                        onMouseLeave={() => setActiveTech(null)}
+                      >
+                        <TechBallCanvas icon={technology.icon} seed={seed} />
                       </div>
 
                       <span className="mt-1 text-[11px] sm:text-xs font-mono text-slate-400 group-hover:text-amber-300 text-center transition-colors">
@@ -131,8 +115,8 @@ const TechnologiesSection = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default SectionWrapper(TechnologiesSection, "tech");
+export default TechnologiesSection;

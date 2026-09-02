@@ -2,7 +2,7 @@ export const config = {
   html: {
     title: "Cap'n J's Treasure Map",
     fullName: "Jevon Naldo Yoshield",
-    email: "jevonyoshield@mail.com",
+    email: "jevonyoshield@email.com",
     github: "https://github.com/BlackCat-cyber-creator",
     instagram: "https://www.instagram.com/jevon.n.shield/",
     location: "Indonesia (Worldwide Remote)",
@@ -17,12 +17,6 @@ export const config = {
       "High Seas Navigator",
     ],
     tagline: "Architecting resilient digital systems, crafting immersive 3D experiences, and conquering complex codebases across modern web frontiers.",
-    stats: [
-      { label: "Voyages Completed", value: "15+" },
-      { label: "Core Tech Mastered", value: "12+" },
-      { label: "Code Precision", value: "99.9%" },
-      { label: "Current Heading", value: "Full-Stack & 3D" },
-    ],
   },
   sections: {
     about: {
@@ -30,11 +24,6 @@ export const config = {
       h2: "The Voyage.",
       content:
         "Specialized in architecting performant full-stack platforms, scalable microservices, and interactive 3D web experiences. Armed with TypeScript, React, Next.js, Node.js, and Three.js, I navigate modern cloud ecosystems to ship polished, enterprise-ready software.",
-    },
-    experience: {
-      p: "The Captain's Log",
-      h2: "Voyage Milestones.",
-      content: "Charting key expeditions, software engineering roles, and system development milestones across the high seas of tech.",
     },
     tech: {
       p: "Arsenal of the High Seas",

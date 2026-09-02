@@ -1,91 +1,30 @@
 import type { TMotion } from "../types";
-import { Variants } from "framer-motion";
+import type { Variants } from "framer-motion";
 
-export const textVariant = () => {
-  return {
-    hidden: {
-      y: -50,
-      opacity: 0,
-    },
-    show: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "tween", // Changed from "spring" to "tween"
-        duration: 0.75, // Reduced duration
-      },
-    },
-  };
-};
+export const textVariant = (): Variants => ({
+  hidden: { y: -12, opacity: 0 },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: { type: "tween", duration: 0.5, ease: "easeOut" },
+  },
+});
 
 export const fadeIn = (
   direction: TMotion["direction"],
   type: TMotion["type"],
   delay: TMotion["delay"],
   duration: TMotion["duration"]
-): Variants => {
-  return {
-    hidden: {
-      x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
-      y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
-      opacity: 0,
-    },
-    show: {
-      x: 0,
-      y: 0,
-      opacity: 1,
-      transition: {
-        type, // This will now be "tween"
-        delay,
-        duration,
-        ease: "easeOut",
-      },
-    },
-  };
-};
-
-export const zoomIn = (
-  delay: TMotion["delay"],
-  duration: TMotion["duration"]
-) => {
-  return {
-    hidden: {
-      scale: 0,
-      opacity: 0,
-    },
-    show: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "tween",
-        delay,
-        duration,
-        ease: "easeOut",
-      },
-    },
-  };
-};
-
-export const slideIn = (
-  direction: TMotion["direction"],
-  type: TMotion["type"],
-  delay: TMotion["delay"],
-  duration: TMotion["duration"]
-) => {
-  return {
-    hidden: {
-      x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
-      y: direction === "up" ? "100%" : direction === "down" ? "100%" : 0,
-    },
-    show: {
-      x: 0,
-      y: 0,
-      transition: {
-        type,
-        delay,
-        duration,
-        ease: "easeOut",
-      },
-    },
-  };
-};
+): Variants => ({
+  hidden: {
+    x: direction === "left" ? 16 : direction === "right" ? -16 : 0,
+    y: direction === "up" ? 16 : direction === "down" ? -16 : 0,
+    opacity: 0,
+  },
+  show: {
+    x: 0,
+    y: 0,
+    opacity: 1,
+    transition: { type: type === "spring" ? "spring" : "tween", delay, duration, ease: "easeOut" },
+  },
+});

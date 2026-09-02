@@ -1,14 +1,29 @@
-import { useState, useRef, Suspense } from "react";
+import { useState, useRef, Suspense, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
-import { random } from "maath";
 import * as THREE from "three";
-import { TypedArray } from "three";
 
-const StarsBackground = (props: any) => {
+// High-performance sphere point generator without external dependencies
+function generateSpherePoints(count: number, radius: number): Float32Array {
+  const points = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const u = Math.random();
+    const v = Math.random();
+    const theta = u * 2.0 * Math.PI;
+    const phi = Math.acos(2.0 * v - 1.0);
+    const r = Math.cbrt(Math.random()) * radius;
+    const sinPhi = Math.sin(phi);
+    points[i * 3] = r * sinPhi * Math.cos(theta);
+    points[i * 3 + 1] = r * sinPhi * Math.sin(theta);
+    points[i * 3 + 2] = r * Math.cos(phi);
+  }
+  return points;
+}
+
+const StarsBackground = ({ isMobile, ...props }: { isMobile: boolean }) => {
   const ref = useRef<THREE.Points>(null!);
-  const [sphere] = useState<TypedArray>(() =>
-    random.inSphere(new Float32Array(1200), { radius: 1.4 })
+  const [sphere] = useState<Float32Array>(() =>
+    generateSpherePoints(isMobile ? 500 : 900, 1.4)
   );
 
   useFrame((_state, delta) => {
@@ -24,7 +39,7 @@ const StarsBackground = (props: any) => {
         <PointMaterial
           transparent
           color="#38bdf8"
-          size={0.002}
+          size={isMobile ? 0.0025 : 0.002}
           sizeAttenuation={true}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
@@ -35,18 +50,51 @@ const StarsBackground = (props: any) => {
 };
 
 const StarsBackgroundCanvas = () => {
+  const [isInView, setIsInView] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="absolute inset-0 z-[-1] h-full w-full pointer-events-none">
-      <Canvas
-        camera={{ position: [0, 0, 1] }}
-        dpr={[1, 1]}
-        gl={{ preserveDrawingBuffer: false, antialias: false, powerPreference: "low-power" }}
-      >
-        <Suspense fallback={null}>
-          <StarsBackground />
-        </Suspense>
-        <Preload all />
-      </Canvas>
+    <div ref={containerRef} className="absolute inset-0 z-[-1] h-full w-full pointer-events-none">
+      {isInView && (
+        <Canvas
+          camera={{ position: [0, 0, 1] }}
+          dpr={[1, 1]}
+          gl={{ preserveDrawingBuffer: false, antialias: false, powerPreference: "low-power" }}
+        >
+          <Suspense fallback={null}>
+            <StarsBackground isMobile={isMobile} />
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      )}
     </div>
   );
 };

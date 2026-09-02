@@ -5,18 +5,11 @@ import pertamina from "../assets/Pertamina.png";
 import jobit from "../assets/jobit.png";
 import tripguide from "../assets/tripguide.png";
 
-export const projectCategories = [
-  { id: "all", label: "All Heists" },
-  { id: "fullstack", label: "Full-Stack" },
-  { id: "ai", label: "AI & Healthcare" },
-  { id: "web", label: "Web Applications" },
-] as const;
-
 export const projects: TProject[] = [
   {
     name: "Pertamina Logistics & Fuel Engine",
     description:
-      "A comprehensive commercial fuel allocation and booking platform featuring triple-role orchestration (Admin, Staff, Fleet Driver) to solve depot congestion and streamline logistics across Indonesia.",
+      "A commercial fuel allocation and booking platform with multi-role orchestration (Admin, Staff, Fleet Driver) streamlining depot operations.",
     tags: [
       { name: "React", color: "blue-text-gradient" },
       { name: "Firebase", color: "green-text-gradient" },
@@ -25,7 +18,6 @@ export const projects: TProject[] = [
     ],
     image: pertamina,
     category: "fullstack",
-    featured: true,
     websiteLink: "https://studio--studio-1002881994-2b7ff.us-central1.hosted.app/",
     githubLink: "https://github.com/BlackCat-cyber-creator",
     favicon: "https://studio--studio-1002881994-2b7ff.us-central1.hosted.app/favicon.ico",
@@ -38,7 +30,7 @@ export const projects: TProject[] = [
   {
     name: "AIDOC Diagnostic Intelligence",
     description:
-      "AI-powered medical assessment client designed to evaluate user symptoms against large-scale clinical datasets to deliver instant educational health triage insights.",
+      "AI-powered medical assessment client evaluating user symptoms against clinical datasets to deliver rapid health triage insights.",
     tags: [
       { name: "React", color: "blue-text-gradient" },
       { name: "AI/LLM", color: "green-text-gradient" },
@@ -47,7 +39,6 @@ export const projects: TProject[] = [
     ],
     image: aidoc,
     category: "ai",
-    featured: true,
     websiteLink: "https://studio--aidoc-ze7io.us-central1.hosted.app/",
     githubLink: "https://github.com/BlackCat-cyber-creator",
     favicon: "https://studio--aidoc-ze7io.us-central1.hosted.app/favicon.ico",
@@ -60,7 +51,7 @@ export const projects: TProject[] = [
   {
     name: "Job IT Career Discovery Engine",
     description:
-      "Modern job portal and career discovery web application enabling tech professionals to filter openings by geolocation, verified salary brackets, and tech stack requirements.",
+      "Career discovery web application allowing developers to filter jobs by geolocation, verified salary brackets, and tech stacks.",
     tags: [
       { name: "React", color: "blue-text-gradient" },
       { name: "REST API", color: "green-text-gradient" },
@@ -69,7 +60,6 @@ export const projects: TProject[] = [
     ],
     image: jobit,
     category: "web",
-    featured: false,
     websiteLink: "https://job-it-clone-chi.vercel.app/",
     githubLink: "https://github.com/BlackCat-cyber-creator",
     favicon: "https://www.google.com/s2/favicons?domain=job-it-clone-chi.vercel.app",
@@ -82,7 +72,7 @@ export const projects: TProject[] = [
   {
     name: "Trip Guide Global Voyager",
     description:
-      "Comprehensive travel exploration and booking platform allowing voyagers to search flight routes, accommodations, and curated local hidden gems around the world.",
+      "Travel exploration platform enabling voyagers to discover routes, accommodations, and curated local hidden gems worldwide.",
     tags: [
       { name: "Next.js", color: "blue-text-gradient" },
       { name: "Supabase", color: "green-text-gradient" },
@@ -91,7 +81,6 @@ export const projects: TProject[] = [
     ],
     image: tripguide,
     category: "fullstack",
-    featured: false,
     websiteLink: "https://trip-guide-nu.vercel.app/",
     githubLink: "https://github.com/BlackCat-cyber-creator",
     favicon: "https://www.google.com/s2/favicons?domain=trip-guide-nu.vercel.app",
