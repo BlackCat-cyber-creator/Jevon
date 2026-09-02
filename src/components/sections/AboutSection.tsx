@@ -45,32 +45,32 @@ const ServiceCard: React.FC<IServiceCardProps> = ({
         0{index + 1}
       </div>
 
-      {/* Icon — centered on mobile, left on desktop */}
-      <div className="flex h-13 w-13 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-slate-950/80 border border-slate-800 group-hover:border-amber-400/20 p-2.5 mb-4 transition-all duration-300 group-hover:scale-105 mx-auto sm:mx-0">
-        <img src={icon} alt={title} className="h-full w-full object-contain" />
+      {/* Compact, elegantly proportioned icon */}
+      <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-slate-950/80 border border-slate-800 group-hover:border-amber-400/20 p-2 mb-3.5 transition-all duration-300 group-hover:scale-105">
+        <img src={icon} alt={title} className="h-6 w-6 sm:h-7 sm:w-7 object-contain" />
       </div>
 
-      {/* Title + Subtitle */}
-      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors text-center sm:text-left">
+      {/* Title + Subtitle (always clean left-aligned) */}
+      <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors text-left">
         {title}
       </h3>
       {subtitle && (
-        <p className="text-[11px] sm:text-xs font-mono text-cyan-400 mt-1 uppercase tracking-wider text-center sm:text-left">
+        <p className="text-[11px] sm:text-xs font-mono text-cyan-400 mt-1 uppercase tracking-wider text-left">
           {subtitle}
         </p>
       )}
 
       {/* Description */}
       {description && (
-        <p className="text-xs sm:text-sm text-slate-300/80 mt-2.5 leading-relaxed font-light text-center sm:text-left">
+        <p className="text-xs sm:text-sm text-slate-300/80 mt-2.5 leading-relaxed font-light text-left">
           {description}
         </p>
       )}
     </div>
 
-    {/* Skills — centered on mobile, left on desktop */}
+    {/* Skills */}
     {skills && (
-      <div className="mt-4 pt-3.5 border-t border-slate-800/80 flex flex-wrap gap-1.5 justify-center sm:justify-start">
+      <div className="mt-4 pt-3.5 border-t border-slate-800/80 flex flex-wrap gap-1.5 justify-start">
         {skills.map((skill) => (
           <span
             key={skill}
@@ -95,18 +95,18 @@ const AboutSection = () => {
     >
       <span className="hash-span">&nbsp;</span>
 
-      {/* Two-column layout: Text + Profile Card */}
-      <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center lg:items-start">
-        {/* Left — Section Header + Manifesto */}
-        <div className="flex-1 min-w-0 w-full text-center sm:text-left">
+      {/* Two-column layout: Text (left) + Profile Card (right) */}
+      <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+        {/* Left — Section Header + Manifesto (always left-aligned as requested) */}
+        <div className="flex-1 min-w-0 w-full text-left">
           <Header useMotion={true} {...config.sections.about} />
 
           {/* Gold drop-cap manifesto */}
           <motion.div
             variants={fadeIn("", "tween", 0.1, 0.9)}
-            className="mt-5 max-w-2xl mx-auto sm:mx-0"
+            className="mt-5 max-w-2xl text-left"
           >
-            <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed font-light">
+            <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed font-light text-left">
               <span className="float-left font-pirata text-4xl sm:text-5xl text-amber-400 leading-[0.8] mr-2 mt-1">S</span>
               pecialized in architecting performant full-stack platforms, scalable microservices,
               and interactive 3D web experiences. Armed with{" "}
@@ -120,7 +120,7 @@ const AboutSection = () => {
           </motion.div>
         </div>
 
-        {/* Right — Holographic Captain Profile Card */}
+        {/* Right — Holographic Captain Profile Card (Centered in column on mobile) */}
         <motion.div
           variants={fadeIn("left", "spring", 0.25, 0.7)}
           className="flex-shrink-0 flex items-center justify-center w-full lg:w-auto"
@@ -143,11 +143,11 @@ const AboutSection = () => {
         </motion.div>
       </div>
 
-      {/* Engineering Pillars Grid — Centered and symmetric on mobile */}
+      {/* Engineering Pillars Grid */}
       <div className="mt-14 sm:mt-16">
         <motion.h3
           variants={fadeIn("up", "tween", 0.1, 0.7)}
-          className="text-xs font-mono font-semibold uppercase tracking-widest text-amber-400/80 mb-6 flex items-center justify-center sm:justify-start gap-3"
+          className="text-xs font-mono font-semibold uppercase tracking-widest text-amber-400/80 mb-6 flex items-center gap-3"
         >
           <span className="h-px flex-1 bg-gradient-to-r from-transparent to-amber-400/20" />
           Core Engineering Pillars

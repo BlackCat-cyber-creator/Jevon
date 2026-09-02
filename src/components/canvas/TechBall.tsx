@@ -60,7 +60,7 @@ interface ITechBallCanvasProps {
   seed?: number;
 }
 
-// Dedicated Canvas for Desktop (Zero scroll drag lag)
+// Dedicated Canvas for Desktop (Camera distance calibrated at z=8.8 to ensure zero edge clipping)
 export const TechBallCanvas: React.FC<ITechBallCanvasProps> = memo(({ icon, seed = 0 }) => {
   return (
     <Canvas
@@ -71,7 +71,7 @@ export const TechBallCanvas: React.FC<ITechBallCanvasProps> = memo(({ icon, seed
         powerPreference: "high-performance",
         antialias: true,
       }}
-      camera={{ position: [0, 0, 6], fov: 45 }}
+      camera={{ position: [0, 0, 8.8], fov: 45 }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
