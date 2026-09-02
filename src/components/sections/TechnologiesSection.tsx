@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { View, Preload, useTexture } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { TechBallMesh } from "../canvas/TechBall";
+import { TechBallMesh, TechBallCanvas } from "../canvas/TechBall";
 import { techClusters, technologies } from "../../constants/technologies";
 import { config } from "../../constants/config";
 import { Header } from "../atoms/Header";
@@ -16,7 +16,7 @@ const TechnologiesSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Preload all textures into memory immediately to prevent rendering delays
+    // Preload all textures into memory
     technologies.forEach((t) => {
       try {
         useTexture.preload(t.icon);
@@ -48,21 +48,23 @@ const TechnologiesSection = () => {
       <span className="hash-span">&nbsp;</span>
 
       <div ref={containerRef} className="relative">
-        {/* 1 Single Unified WebGL Canvas for ALL Tech Balls (Eliminates mobile WebGL context limit crashes & sad emoji) */}
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <Canvas
-            eventSource={containerRef}
-            dpr={isMobile ? [1, 1] : [1, 1.2]}
-            gl={{
-              preserveDrawingBuffer: false,
-              powerPreference: "high-performance",
-              antialias: !isMobile,
-            }}
-          >
-            <View.Port />
-            <Preload all />
-          </Canvas>
-        </div>
+        {/* On Mobile: 1 Single Unified WebGL Canvas (Eliminates mobile WebGL context limit crashes & sad emoji) */}
+        {isMobile && (
+          <div className="fixed inset-0 pointer-events-none z-0">
+            <Canvas
+              eventSource={containerRef}
+              dpr={[1, 1]}
+              gl={{
+                preserveDrawingBuffer: false,
+                powerPreference: "low-power",
+                antialias: false,
+              }}
+            >
+              <View.Port />
+              <Preload all />
+            </Canvas>
+          </div>
+        )}
 
         <div className="relative z-10">
           <Header useMotion={false} {...config.sections.tech} />
@@ -93,10 +95,7 @@ const TechnologiesSection = () => {
                     return (
                       <div
                         key={technology.name}
-                        className="flex flex-col items-center justify-center relative cursor-pointer group select-none"
-                        onClick={() => handleTechToggle(technology)}
-                        onMouseEnter={() => setActiveTech(technology)}
-                        onMouseLeave={() => setActiveTech(null)}
+                        className="flex flex-col items-center justify-center relative select-none"
                       >
                         {/* Tooltip Card directly above tapped/hovered ball */}
                         <AnimatePresence>
@@ -139,14 +138,30 @@ const TechnologiesSection = () => {
                           )}
                         </AnimatePresence>
 
-                        {/* 3D Ball Viewport Rendered in Single Context */}
-                        <div className="h-20 w-20 sm:h-28 sm:w-28 flex items-center justify-center">
-                          <View className="h-full w-full">
-                            <Suspense fallback={null}>
-                              <TechBallMesh imgUrl={technology.icon} seed={seed} />
-                            </Suspense>
-                          </View>
-                        </div>
+                        {/* Adaptive 3D Ball: Dedicated Canvas on Desktop (zero lag) / Unified View on Mobile (zero context crash) */}
+                        {isMobile ? (
+                          <div
+                            className="h-20 w-20 flex items-center justify-center cursor-pointer"
+                            onClick={() => handleTechToggle(technology)}
+                            onMouseEnter={() => setActiveTech(technology)}
+                            onMouseLeave={() => setActiveTech(null)}
+                          >
+                            <View className="h-full w-full">
+                              <Suspense fallback={null}>
+                                <TechBallMesh imgUrl={technology.icon} seed={seed} />
+                              </Suspense>
+                            </View>
+                          </div>
+                        ) : (
+                          <div
+                            className="h-28 w-28 cursor-grab active:cursor-grabbing"
+                            onClick={() => handleTechToggle(technology)}
+                            onMouseEnter={() => setActiveTech(technology)}
+                            onMouseLeave={() => setActiveTech(null)}
+                          >
+                            <TechBallCanvas icon={technology.icon} seed={seed} />
+                          </div>
+                        )}
 
                         <span className="mt-1 text-[11px] sm:text-xs font-mono text-slate-400 group-hover:text-amber-300 text-center transition-colors">
                           {technology.name}

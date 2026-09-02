@@ -1,6 +1,6 @@
 import PirateMapCanvas from "./PirateMapCanvas";
-import { TechBallMesh } from "./TechBall";
+import { TechBallMesh, TechBallCanvas } from "./TechBall";
 import ShipInBottleCanvas from "./ShipInBottleCanvas";
 import StarsBackgroundCanvas from "./StarsBackground";
 
-export { PirateMapCanvas, TechBallMesh, ShipInBottleCanvas, StarsBackgroundCanvas };
+export { PirateMapCanvas, TechBallMesh, TechBallCanvas, ShipInBottleCanvas, StarsBackgroundCanvas };

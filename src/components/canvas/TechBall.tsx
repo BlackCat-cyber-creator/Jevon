@@ -1,13 +1,16 @@
-import React, { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import { Decal, useTexture } from "@react-three/drei";
+import React, { Suspense, memo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Decal, OrbitControls, Preload, useTexture } from "@react-three/drei";
 import * as THREE from "three";
+
+import CanvasLoader from "../layout/CanvasLoader";
 
 interface ITechBallProps {
   imgUrl: string;
   seed?: number;
 }
 
+// 3D Mesh Component (Used directly on mobile unified View and inside desktop Canvas)
 export const TechBallMesh: React.FC<ITechBallProps> = ({ imgUrl, seed = 0 }) => {
   const [decal] = useTexture([imgUrl]);
   const meshRef = useRef<THREE.Mesh>(null!);
@@ -52,4 +55,39 @@ export const TechBallMesh: React.FC<ITechBallProps> = ({ imgUrl, seed = 0 }) => 
   );
 };
 
-export default TechBallMesh;
+interface ITechBallCanvasProps {
+  icon: string;
+  seed?: number;
+}
+
+// Dedicated Canvas for Desktop (Zero scroll drag lag)
+export const TechBallCanvas: React.FC<ITechBallCanvasProps> = memo(({ icon, seed = 0 }) => {
+  return (
+    <Canvas
+      frameloop="always"
+      dpr={[1, 1.2]}
+      gl={{
+        preserveDrawingBuffer: false,
+        powerPreference: "high-performance",
+        antialias: true,
+      }}
+      camera={{ position: [0, 0, 6], fov: 45 }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          minAzimuthAngle={-Math.PI / 3}
+          maxAzimuthAngle={Math.PI / 3}
+          minPolarAngle={Math.PI / 2.8}
+          maxPolarAngle={Math.PI / 1.6}
+          rotateSpeed={0.8}
+        />
+        <TechBallMesh imgUrl={icon} seed={seed} />
+      </Suspense>
+      <Preload all />
+    </Canvas>
+  );
+});
+
+export default TechBallCanvas;
