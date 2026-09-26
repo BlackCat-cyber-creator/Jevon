@@ -10,6 +10,8 @@ import { Header } from "../atoms/Header";
 import { styles } from "../../constants/styles";
 import type { TTechnology } from "../../types";
 
+let texturesPreloaded = false;
+
 const TechnologiesSection = () => {
   const containerRef = useRef<HTMLDivElement>(null!);
   const [activeTech, setActiveTech] = useState<TTechnology | null>(null);
@@ -17,13 +19,16 @@ const TechnologiesSection = () => {
 
   useEffect(() => {
     // Preload all textures into memory
-    technologies.forEach((t) => {
-      try {
-        useTexture.preload(t.icon);
-      } catch {
-        // Ignore if already cached
-      }
-    });
+    if (!texturesPreloaded) {
+      technologies.forEach((t) => {
+        try {
+          useTexture.preload(t.icon);
+        } catch {
+          // Ignore if already cached
+        }
+      });
+      texturesPreloaded = true;
+    }
 
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     setIsMobile(mediaQuery.matches);
