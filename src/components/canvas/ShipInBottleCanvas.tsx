@@ -5,6 +5,7 @@ import { OrbitControls, Preload, useGLTF, Environment, ContactShadows } from "@r
 import * as THREE from "three";
 
 import CanvasLoader from "../layout/CanvasLoader";
+import { fastSin, fastCos } from "../../utils/mathUtils";
 
 interface IShipProps {
   isMobile: boolean;
@@ -38,12 +39,12 @@ const ShipInBottle: React.FC<IShipProps> = ({ isMobile }) => {
       meshRef.current.rotation.y += delta * 0.38;
       
       // 2. Harmonic Wave Kinematics (Pitch & Roll on oceanic swell)
-      meshRef.current.rotation.x = Math.sin(t * 0.9) * 0.06;
-      meshRef.current.rotation.z = Math.cos(t * 0.7) * 0.04;
+      meshRef.current.rotation.x = fastSin(t * 0.9) * 0.06;
+      meshRef.current.rotation.z = fastCos(t * 0.7) * 0.04;
       
       // 3. Smooth Vertical Wave Bobbing
       const baseY = isMobile ? -0.55 : 0.0;
-      meshRef.current.position.y = baseY + Math.sin(t * 1.5) * 0.1;
+      meshRef.current.position.y = baseY + fastSin(t * 1.5) * 0.1;
     }
   });
 
