@@ -27,9 +27,12 @@ const Navbar = () => {
     // IntersectionObserver for zero-cost section highlighting
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
+        const intersectingEntry = entries.find((entry) => entry.isIntersecting);
+        if (intersectingEntry) {
+          setActive((prev) =>
+            prev === intersectingEntry.target.id ? prev : intersectingEntry.target.id
+          );
+        }
       },
       { rootMargin: "-25% 0px -50% 0px", threshold: 0.1 }
     );
