@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState, useRef } from "react";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
@@ -100,8 +101,8 @@ const ShipInBottle: React.FC<IShipProps> = ({ isMobile }) => {
 
 const ShipInBottleCanvas: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isInView, setIsInView] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useIntersectionObserver(containerRef, true);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -113,21 +114,6 @@ const ShipInBottleCanvas: React.FC = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
     return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.05 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
   }, []);
 
   return (
