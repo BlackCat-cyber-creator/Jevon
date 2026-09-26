@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, CheckCircle2, X } from "lucide-react";
 
-import { projects } from "../../constants";
-import { config } from "../../constants/config";
-import { Header } from "../atoms/Header";
-import { styles } from "../../constants/styles";
 import type { TProject } from "../../types";
 import { GithubIcon } from "../atoms/Icons";
-import ProjectCard from "./ProjectCard";
 
 // Modal detail inspector
 const ProjectModal: React.FC<{ project: TProject; onClose: () => void }> = ({ project, onClose }) => {
@@ -104,43 +99,4 @@ const ProjectModal: React.FC<{ project: TProject; onClose: () => void }> = ({ pr
   );
 };
 
-const ProjectsSection = () => {
-  const [selectedProject, setSelectedProject] = useState<TProject | null>(null);
-
-  return (
-    <>
-      <section
-        id="work"
-        className={`${styles.padding} relative z-0 mx-auto max-w-7xl`}
-      >
-        <span className="hash-span">&nbsp;</span>
-
-        <Header useMotion={true} {...config.sections.works} />
-        <p className="text-slate-300/80 mt-2 max-w-2xl text-sm leading-relaxed font-light">
-          {config.sections.works.content}
-        </p>
-
-        {/* Sleek, compact 4-card responsive grid */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.name}
-              project={project}
-              onOpen={() => setSelectedProject(project)}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Modal portal */}
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
-    </>
-  );
-};
-
-export default ProjectsSection;
+export default ProjectModal;
