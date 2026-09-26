@@ -124,11 +124,11 @@ class AudioEngine {
         this.gainNode.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.5);
         setTimeout(() => {
           if (this.noiseNode) {
-            try { (this.noiseNode as AudioScheduledSourceNode).stop(); } catch {}
+            try { (this.noiseNode as AudioScheduledSourceNode).stop(); } catch (e) { /* ignore */ }
             this.noiseNode = null;
           }
           if (this.lfo) {
-            try { this.lfo.stop(); } catch {}
+            try { this.lfo.stop(); } catch (e) { /* ignore */ }
             this.lfo = null;
           }
         }, 500);
@@ -161,7 +161,7 @@ class AudioEngine {
 
       osc.start();
       osc.stop(this.ctx.currentTime + duration);
-    } catch {}
+    } catch (e) { /* ignore */ }
   }
 
   // Play hover tick
@@ -182,7 +182,7 @@ class AudioEngine {
           this.playChime(freq, 0.4);
         }, idx * 60);
       });
-    } catch {}
+    } catch (e) { /* ignore */ }
   }
 
   private playChime(freq: number, duration: number) {

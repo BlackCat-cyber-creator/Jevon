@@ -186,7 +186,7 @@ const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
     [animationHandlers]
   );
 
-  const handlePointerEnter = useCallback((_event: PointerEvent) => {
+  const handlePointerEnter = useCallback(() => {
     const card = cardRef.current;
     const wrap = wrapRef.current;
 
