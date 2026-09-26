@@ -1,4 +1,5 @@
 import { Suspense, memo, useRef, useEffect, useState } from "react";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF, Float, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
@@ -88,6 +89,7 @@ const PirateMapCanvas: React.FC = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useIntersectionObserver(containerRef, false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
