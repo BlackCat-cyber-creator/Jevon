@@ -12,15 +12,13 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    let ticking = false;
+    let isScrolled = false;
 
     const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 40);
-          ticking = false;
-        });
-        ticking = true;
+      const shouldBeScrolled = window.scrollY > 40;
+      if (isScrolled !== shouldBeScrolled) {
+        isScrolled = shouldBeScrolled;
+        setScrolled(shouldBeScrolled);
       }
     };
 
