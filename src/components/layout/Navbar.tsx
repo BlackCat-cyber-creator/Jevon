@@ -12,25 +12,24 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    let isScrolled = false;
+    let ticking = false;
 
     const handleScroll = () => {
-      const shouldBeScrolled = window.scrollY > 40;
-      if (isScrolled !== shouldBeScrolled) {
-        isScrolled = shouldBeScrolled;
-        setScrolled(shouldBeScrolled);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     // IntersectionObserver for zero-cost section highlighting
     const observer = new IntersectionObserver(
       (entries) => {
-        const intersectingEntry = entries.find((entry) => entry.isIntersecting);
-        if (intersectingEntry) {
-          setActive((prev) =>
-            prev === intersectingEntry.target.id ? prev : intersectingEntry.target.id
-          );
-        }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
       },
       { rootMargin: "-25% 0px -50% 0px", threshold: 0.1 }
     );

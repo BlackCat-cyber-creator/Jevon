@@ -1,5 +1,4 @@
 import { useState, useRef, Suspense, useEffect } from "react";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as THREE from "three";
@@ -51,9 +50,9 @@ const StarsBackground = ({ isMobile, ...props }: { isMobile: boolean }) => {
 };
 
 const StarsBackgroundCanvas = () => {
+  const [isInView, setIsInView] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useIntersectionObserver(containerRef, true);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -65,6 +64,21 @@ const StarsBackgroundCanvas = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
     return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (

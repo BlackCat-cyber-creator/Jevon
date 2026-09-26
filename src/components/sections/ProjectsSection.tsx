@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, CheckCircle2, X } from "lucide-react";
 
 import { projects } from "../../constants";
 import { config } from "../../constants/config";

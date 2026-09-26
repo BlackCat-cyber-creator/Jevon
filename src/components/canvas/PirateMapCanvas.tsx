@@ -1,5 +1,4 @@
 import { Suspense, memo, useRef, useEffect, useState } from "react";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF, Float, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
@@ -86,8 +85,8 @@ const MemoizedPirateMap = memo(PirateMap);
 
 const PirateMapCanvas: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useIntersectionObserver(containerRef, false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -99,6 +98,21 @@ const PirateMapCanvas: React.FC = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
     return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
