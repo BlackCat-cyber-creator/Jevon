@@ -170,15 +170,15 @@ const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
   }, [enableTilt]);
 
   const handlePointerMove = useCallback(
-    (_event: PointerEvent) => {
+    (event: PointerEvent) => {
       const card = cardRef.current;
       const wrap = wrapRef.current;
 
       if (!card || !wrap || !animationHandlers) return;
 
       animationHandlers.updateCardTransform(
-        _event.offsetX,
-        _event.offsetY,
+        event.offsetX,
+        event.offsetY,
         card,
         wrap
       );
@@ -198,7 +198,7 @@ const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
   }, [animationHandlers]);
 
   const handlePointerLeave = useCallback(
-    (_event: PointerEvent) => {
+    (event: PointerEvent) => {
       const card = cardRef.current;
       const wrap = wrapRef.current;
 
@@ -206,8 +206,8 @@ const UserProfileCardComponent: React.FC<UserProfileCardProps> = ({
 
       animationHandlers.createSmoothAnimation(
         ANIMATION_CONFIG.SMOOTH_DURATION,
-        _event.offsetX,
-        _event.offsetY,
+        event.offsetX,
+        event.offsetY,
         card,
         wrap
       );

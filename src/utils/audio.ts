@@ -112,7 +112,8 @@ class AudioEngine {
       this.noiseNode = whiteNoise;
       this.lfo = lfo;
       this.gainNode = gain;
-    } catch {
+    } catch (e) {
+      console.warn("Audio error:", e);
       // AudioContext might still require gesture
     }
   }
@@ -124,15 +125,16 @@ class AudioEngine {
         this.gainNode.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.5);
         setTimeout(() => {
           if (this.noiseNode) {
-            try { (this.noiseNode as AudioScheduledSourceNode).stop(); } catch (e) { /* ignore */ }
+            try { (this.noiseNode as AudioScheduledSourceNode).stop(); } catch (e) { console.warn("Audio error:", e); }
             this.noiseNode = null;
           }
           if (this.lfo) {
-            try { this.lfo.stop(); } catch (e) { /* ignore */ }
+            try { this.lfo.stop(); } catch (e) { console.warn("Audio error:", e); }
             this.lfo = null;
           }
         }, 500);
-      } catch {
+      } catch (e) {
+        console.warn("Audio error:", e);
         this.noiseNode = null;
         this.lfo = null;
       }
@@ -161,7 +163,9 @@ class AudioEngine {
 
       osc.start();
       osc.stop(this.ctx.currentTime + duration);
-    } catch (e) { /* ignore */ }
+    } catch (e) {
+      console.warn("Audio error:", e);
+    }
   }
 
   // Play hover tick
@@ -182,7 +186,9 @@ class AudioEngine {
           this.playChime(freq, 0.4);
         }, idx * 60);
       });
-    } catch (e) { /* ignore */ }
+    } catch (e) {
+      console.warn("Audio error:", e);
+    }
   }
 
   private playChime(freq: number, duration: number) {
