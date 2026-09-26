@@ -5,6 +5,7 @@ import { OrbitControls, Preload, useGLTF, Float, Environment, ContactShadows } f
 import * as THREE from "three";
 
 import CanvasLoader from "../layout/CanvasLoader";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 interface IPirateMapProps {
   isMobile: boolean;
@@ -85,20 +86,24 @@ const PirateMap: React.FC<IPirateMapProps> = ({ isMobile }) => {
 const MemoizedPirateMap = memo(PirateMap);
 
 const PirateMapCanvas: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useIntersectionObserver(containerRef, false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
 
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
 
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    return () => observer.disconnect();
   }, []);
 
   return (

@@ -5,7 +5,7 @@ import { OrbitControls, Preload, useGLTF, Environment, ContactShadows } from "@r
 import * as THREE from "three";
 
 import CanvasLoader from "../layout/CanvasLoader";
-import { fastSin, fastCos } from "../../utils/mathUtils";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 interface IShipProps {
   isMobile: boolean;
@@ -101,20 +101,24 @@ const ShipInBottle: React.FC<IShipProps> = ({ isMobile }) => {
 };
 
 const ShipInBottleCanvas: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isInView, setIsInView] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useIntersectionObserver(containerRef, true);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
 
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
 
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    return () => observer.disconnect();
   }, []);
 
   return (

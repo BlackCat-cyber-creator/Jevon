@@ -9,6 +9,7 @@ import { config } from "../../constants/config";
 import { Header } from "../atoms/Header";
 import { styles } from "../../constants/styles";
 import type { TTechnology } from "../../types";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 
 const TechnologyItem = memo(({
@@ -110,7 +111,7 @@ const TechnologyItem = memo(({
 const TechnologiesSection = () => {
   const containerRef = useRef<HTMLDivElement>(null!);
   const [activeTech, setActiveTech] = useState<TTechnology | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     // Preload all textures into memory
@@ -121,16 +122,6 @@ const TechnologiesSection = () => {
         // Ignore if already cached
       }
     });
-
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
   }, []);
 
   const handleTechToggle = useCallback((tech: TTechnology) => {
