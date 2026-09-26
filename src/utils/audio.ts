@@ -113,8 +113,8 @@ class AudioEngine {
       this.lfo = lfo;
       this.gainNode = gain;
     } catch (e) {
-      console.warn("Audio error:", e);
       // AudioContext might still require gesture
+      console.warn("Failed to start sea ambience", e);
     }
   }
 
@@ -125,16 +125,16 @@ class AudioEngine {
         this.gainNode.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.5);
         setTimeout(() => {
           if (this.noiseNode) {
-            try { (this.noiseNode as AudioScheduledSourceNode).stop(); } catch (e) { console.warn("Audio error:", e); }
+            try { (this.noiseNode as AudioScheduledSourceNode).stop(); } catch (e) { console.warn("Failed to stop noise node", e); }
             this.noiseNode = null;
           }
           if (this.lfo) {
-            try { this.lfo.stop(); } catch (e) { console.warn("Audio error:", e); }
+            try { this.lfo.stop(); } catch (e) { console.warn("Failed to stop lfo", e); }
             this.lfo = null;
           }
         }, 500);
       } catch (e) {
-        console.warn("Audio error:", e);
+        console.warn("Failed to stop sea ambience", e);
         this.noiseNode = null;
         this.lfo = null;
       }
@@ -164,7 +164,7 @@ class AudioEngine {
       osc.start();
       osc.stop(this.ctx.currentTime + duration);
     } catch (e) {
-      console.warn("Audio error:", e);
+      console.warn("Failed to play click", e);
     }
   }
 
@@ -187,7 +187,7 @@ class AudioEngine {
         }, idx * 60);
       });
     } catch (e) {
-      console.warn("Audio error:", e);
+      console.warn("Failed to play loot chime", e);
     }
   }
 
