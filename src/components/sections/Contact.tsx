@@ -16,16 +16,8 @@ const Contact = () => {
       await navigator.clipboard.writeText(config.html.email);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Fallback for older browsers
-      const el = document.createElement("textarea");
-      el.value = config.html.email;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.warn("Failed to copy text to clipboard", err);
     }
   };
 
