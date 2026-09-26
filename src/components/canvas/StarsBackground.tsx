@@ -3,6 +3,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as THREE from "three";
 
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+
 // High-performance sphere point generator without external dependencies
 function generateSpherePoints(count: number, radius: number): Float32Array {
   const points = new Float32Array(count * 3);
@@ -51,20 +53,8 @@ const StarsBackground = ({ isMobile, ...props }: { isMobile: boolean }) => {
 
 const StarsBackgroundCanvas = () => {
   const [isInView, setIsInView] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
-    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
